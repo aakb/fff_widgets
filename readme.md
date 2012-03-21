@@ -10,9 +10,10 @@ The web service offers the following methods:
 Returns a fact object from a GUID as a JSON-P response.
 
 ### Call
-?method=getFact&callback=parseJson&guid=1
+    ?method=getFact&callback=parseJson&guid=1
 
 ### Reponse (JSON)
+```javascript
 {
   "guid": "1",
   "title": "Cheers Miss Sophie!",
@@ -36,15 +37,18 @@ Returns a fact object from a GUID as a JSON-P response.
     "Tv"
   ]
 }
+```
 
 ## getFact
 Returns a random GUID matching a published fact object.
 
 ### Call
-?method=getGuid&callback=parseJson
+    ?method=getGuid&callback=parseJson
 
 ### Response (JSON)
+```javascript
 {"guid":"1"}
+```
 
 ## JSON-P Example
 factWidgetLoad('{"facts":[{"guid":423,"title":"Kakao-cola?","date":"23-03-2012T14:33:00Z+1000","author":"Kristensen,Jesper","content":"<p>Vidste du, at ordet 'karat' har vandret fra græsk til arabisk til spansk til resten af Europa, og undervejs har skiftet betydning&nbsp; fra 'lille horn' til 'johannesbrød(kerne)' til 'vægtenhed for guld og sølv' til 'positiv værdi'?</p>","source":{"uri":"http://finurligefakta.dk/&q=1234","text":"Link text"},"inspiration":{"uri":"","text":""},"keywords":["overtro","teatre"]}]}');

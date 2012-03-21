@@ -42,6 +42,7 @@ function fffMain() {
     // Define config object
     var fff = new Object();
     fff.guid = false;
+    fff.getGuid = "//service.finurligefakta.dk/getFactByGuid?callback=?";
     
     // Get url parameter
     function getParameterByName(name) {
@@ -92,10 +93,9 @@ function fffMain() {
       // Get data
       function getFactData(getGUID(params.guid)) {
         // @todo: add guid parameter to service
-        var service = "//service.finurligefakta.dk/getFactByGuid?callback=?"
                       
         $.ajax({
-          url: service,
+          url: getGuid,
           dataType: 'json',
           jsonp:'loadFact'
         });
