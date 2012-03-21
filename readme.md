@@ -51,4 +51,6 @@ Returns a random GUID matching a published fact object.
 ```
 
 ## JSON-P Example
+```javascript
 factWidgetLoad('{"facts":[{"guid":423,"title":"Kakao-cola?","date":"23-03-2012T14:33:00Z+1000","author":"Kristensen,Jesper","content":"<p>Vidste du, at ordet 'karat' har vandret fra græsk til arabisk til spansk til resten af Europa, og undervejs har skiftet betydning&nbsp; fra 'lille horn' til 'johannesbrød(kerne)' til 'vægtenhed for guld og sølv' til 'positiv værdi'?</p>","source":{"uri":"http://finurligefakta.dk/&q=1234","text":"Link text"},"inspiration":{"uri":"","text":""},"keywords":["overtro","teatre"]}]}');
+```
