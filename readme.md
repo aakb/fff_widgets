@@ -54,3 +54,24 @@ Returns a random GUID matching a published fact object.
 ```javascript
 factWidgetLoad('{"facts":[{"guid":423,"title":"Kakao-cola?","date":"23-03-2012T14:33:00Z+1000","author":"Kristensen,Jesper","content":"<p>Vidste du, at ordet 'karat' har vandret fra græsk til arabisk til spansk til resten af Europa, og undervejs har skiftet betydning&nbsp; fra 'lille horn' til 'johannesbrød(kerne)' til 'vægtenhed for guld og sølv' til 'positiv værdi'?</p>","source":{"uri":"http://finurligefakta.dk/&q=1234","text":"Link text"},"inspiration":{"uri":"","text":""},"keywords":["overtro","teatre"]}]}');
 ```
+
+## Configuration script
+```html
+<!-- FFF Widget Code - So far does nothing :-) -->
+<script type="text/javascript">
+
+  var fffWidgetConfig = [];
+  fffWidgetConfig.push({
+    "widget" : "interactive",
+    "target" : "#widget1",
+    "style"  : "full"
+  });
+
+  (function() {
+    var fff = document.createElement('script'); fff.type = 'text/javascript'; fff.async = true;
+    fff.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'service.finurligefakta.local/fff.widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fff, s);
+  })();
+
+</script>
+```
