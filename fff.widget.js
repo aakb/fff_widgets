@@ -1,23 +1,30 @@
 // Your code goes here.
 var finurligeFaktaWidget = (function() {
   "use strict";
-  
+
   // Define global config object
   var fff = {};
-    fff.domain = "//service.finurligefakta.dk/";
-    fff.baseGuid = null;
-    fff.getGuid = fff.domain + "?method=getGuid&callback=?";
-  
+  fff.domain = "//service.finurligefakta.dk/";
+  fff.baseGuid = null;
+  fff.getGuid = fff.domain + "?method=getGuid&callback=?";
+
+  // Defaul conifguration options.
+  var configuration = {}
+  configuration.widget = 'interactive';
+  configuration.target = '#fffwidget';
+  configuration.style = 'full';
+  configuration.buttons = {'reload' : true};
+
   // Define widget configuration object
   var settings = [];
-  
+
   // Get url parameter
   function getParameterByName(name) {
     var match = new RegExp('[?&]' + name + '=([^&]*)')
                 .exec(window.location.search);
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
   }
-  
+
   // ----- / Define widgets -----
   // Interactive widget
   function interactiveWidget(data, params) {
@@ -45,24 +52,24 @@ var finurligeFaktaWidget = (function() {
         .append($("<a />", {
           "rel"   : "external",
           "href"  : data.sources[0].url,
-          "text"  : data.sources[0].title       
+          "text"  : data.sources[0].title
         }))
       )
     );
-    this.element = $widget;    
+    this.element = $widget;
   }
-  
+
   interactiveWidget.prototype.insert = function(target) {
     this.element.hide()
                 .appendTo(jQuery(target))
                 .slideDown("fast");
   };
-  
+
   // Slidein widgets
   function slideInWidget(data, params) {
     this.element = "<p>Output: Interactive Widget</p>";
   }
-  
+
   // Mobile widget
   function mobileWidget(data, params) {
     this.element = "<p>Output: Interactive Widget</p>";
@@ -80,7 +87,7 @@ var finurligeFaktaWidget = (function() {
       });
     }
   }
-  
+
   // Get data
  function getFactData(params) {
     var method = "getFact";
@@ -97,7 +104,7 @@ var finurligeFaktaWidget = (function() {
       jsonpCallback: "finurligeFaktaWidget.load"
     });
   }
-  
+
   // Returns object from json
   function loadFact(rtnjson) {
     var data = rtnjson;
@@ -107,27 +114,27 @@ var finurligeFaktaWidget = (function() {
     // Call appropriate function to create widget
     switch(params.widget) {
       case 'interactive':
-        widget = new interactiveWidget(data, params); 
+        widget = new interactiveWidget(data, params);
         widget.insert(params.target);
         break;
-        
+
       case 'slidein':
-        widget = new slideInWidget(data, params); 
+        widget = new slideInWidget(data, params);
         widget.insert(params.target);
         break;
-        
+
       case 'mobile':
-        widget = new mobileWidget(data, params); 
+        widget = new mobileWidget(data, params);
         widget.insert(params.target);
         break;
-    }    
+    }
   }
-  
+
   // Insert widget
   function insertWidget($widget, target) {
     var $target = jQuery(target);
   }
-  
+
   // Define error handling function
   function errorHandler(rtnjson) {
     alert(rtnjson.msg);
@@ -137,17 +144,21 @@ var finurligeFaktaWidget = (function() {
     // Expand configuration parameters
     // Get GUID from url string
     fff.baseGuid = getParameterByName("fffGuid");
-  
-    // Start creating some widgets 
+
+    // Start creating some widgets
     // Loop through configuration array
     $.each(fffWidgetConfig, function(i, params) {
       if (params.widget === "interactive") {
         params.guid = fff.baseGuid;
       }
+      // Merge default configuration into params.
+      params = jQuery.extend({}, configuration, params);
+
+      // Activate the widget.
       widget(params);
     });
   }
-  
+
   return {
     init: initializeFramework,
     load: loadFact,
@@ -155,6 +166,8 @@ var finurligeFaktaWidget = (function() {
   };
 
 }());
+
+// Load jquery in noConflict mode.
 
 jQuery(document).ready(function() {
   finurligeFaktaWidget.init();
