@@ -139,7 +139,7 @@ var finurligeFaktaWidget = (function() {
     fff.baseGuid = getParameterByName("fffGuid");
   
     // Start creating some widgets 
-    // Loop through through configuration array
+    // Loop through configuration array
     $.each(fffWidgetConfig, function(i, params) {
       if (params.widget === "interactive") {
         params.guid = fff.baseGuid;
