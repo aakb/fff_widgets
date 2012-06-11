@@ -15,6 +15,8 @@ var finurligeFaktaWidget = (function() {
   configuration.style = 'full';
   configuration.buttons = {'reload' : true};
 
+  var jQ;
+
   // Define widget configuration object
   var settings = [];
 
@@ -29,27 +31,27 @@ var finurligeFaktaWidget = (function() {
   // Interactive widget
   function interactiveWidget(data, params) {
     // Create wrapper for mobile menu.
-    var $widget = $("<div />", {
+    var $widget = jQ("<div />", {
       "class" : "fffW-interactive fffW-widget"
     })
     .append(
-      $("<div />", {
+      jQ("<div />", {
         "class" : "fffW-innerwrapper"
       })
-      .append($("<h2 />", {
+      .append(jQ("<h2 />", {
         "class" : "fffW-title",
         "text"  : data.title
       }))
-      .append($("<div />", {
+      .append(jQ("<div />", {
         "class" : "fffW-text"
       })
         .append(data.content)
       )
-      .append($("<span />", {
+      .append(jQ("<span />", {
         "class" : "fffW-link fffW-source",
         "text"  : "Kilde: "
       })
-        .append($("<a />", {
+        .append(jQ("<a />", {
           "rel"   : "external",
           "href"  : data.sources[0].url,
           "text"  : data.sources[0].title
@@ -61,7 +63,7 @@ var finurligeFaktaWidget = (function() {
 
   interactiveWidget.prototype.insert = function(target) {
     this.element.hide()
-                .appendTo(jQuery(target))
+                .appendTo(jQ(target))
                 .slideDown("fast");
   };
 
@@ -80,7 +82,7 @@ var finurligeFaktaWidget = (function() {
     if (params.guid !== null) {
       getFactData(params);
     } else {
-      $.getJSON(fff.getGuid, function(rtnjson) {
+      jQ.getJSON(fff.getGuid, function(rtnjson) {
         params.guid = rtnjson.guid;
         // @todo: Add check for existing guids
         getFactData(params);
@@ -95,7 +97,7 @@ var finurligeFaktaWidget = (function() {
     // Push parameters to settings object for later retrieval
     settings[params.guid] = params;
 
-    $.ajax({
+    jQ.ajax({
       url: fff.domain,
       cache: true,
       data: {guid: params.guid, method: method},
@@ -132,7 +134,7 @@ var finurligeFaktaWidget = (function() {
 
   // Insert widget
   function insertWidget($widget, target) {
-    var $target = jQuery(target);
+    var $target = jQ(target);
   }
 
   // Define error handling function
@@ -140,19 +142,22 @@ var finurligeFaktaWidget = (function() {
     alert(rtnjson.msg);
   }
 
-  function initializeFramework() {
+  function initializeFramework(ncjQuery) {
+    // Set jQuery
+    jQ = ncjQuery;
+
     // Expand configuration parameters
     // Get GUID from url string
     fff.baseGuid = getParameterByName("fffGuid");
 
     // Start creating some widgets
     // Loop through configuration array
-    $.each(fffWidgetConfig, function(i, params) {
+    jQ.each(fffWidgetConfig, function(i, params) {
       if (params.widget === "interactive") {
         params.guid = fff.baseGuid;
       }
       // Merge default configuration into params.
-      params = jQuery.extend({}, configuration, params);
+      params = jQ.extend({}, configuration, params);
 
       // Activate the widget.
       widget(params);
@@ -167,8 +172,44 @@ var finurligeFaktaWidget = (function() {
 
 }());
 
-// Load jquery in noConflict mode.
 
-jQuery(document).ready(function() {
-  finurligeFaktaWidget.init();
-});
+// Include JQuery programatically
+(function() {
+  // Don't let the script run forever.
+  var attempts = 30;
+
+  var addLibs = function() {
+    // Try to insert jQuery into the header.
+    var head = document.getElementsByTagName("head");
+    if (head.length == 0) {
+      if (attempts-- > 0) {
+        setTimeout(addLibs, 100);
+      }
+      return;
+    }
+
+    var node = document.createElement("script");
+    node.src = "//ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js";
+    head[0].appendChild(node);
+    checkLibs();
+  }
+
+  var checkLibs = function() {
+    if (typeof(jQuery) === "undefined" || parseFloat(jQuery.fn.jquery) < 1.4) {
+      // Library isn't done loading
+      if (attempts-- > 0) {
+        setTimeout(checkLibs, 100);
+      }
+      return;
+    }
+    var jQ = jQuery.noConflict(true);
+    jQ(document).ready(function() {
+      // Init the widget parsing in jQuery 1.4.
+      finurligeFaktaWidget.init(jQ);
+    });
+  }
+
+  // Load jQuery 1.4.0 as thats the first known version to support jsonp as we 
+  // uses it in the widgets to load facts.
+  addLibs();
+})();
