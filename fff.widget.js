@@ -3,21 +3,25 @@ var finurligeFaktaWidget = (function() {
   "use strict";
 
   // Define global config object
-  var fff = {};
-  fff.domain = "//service.finurligefakta.dk/";
-  fff.baseGuid = null;
-  fff.getGuid = fff.domain + "?method=getGuid&callback=?";
+  var fff = {
+    'domain' : "//service.finurligefakta.dk/",
+    'baseGuid' : null
+  };
 
   // Defaul conifguration options.
-  var configuration = {}
-  configuration.widget = 'interactive';
-  configuration.target = '#fffwidget';
-  configuration.style = 'full';
-  configuration.buttons = {'reload' : true};
+  var options = {
+    'widget' : 'interactive',
+    'target' : '#fffwidget',
+    'style' : 'full',
+    'button' : {
+      'reload' : true
+    }
+  };
 
+  // jQuery 1.4 or newer, so use this through the code.
   var jQ;
 
-  // Define widget configuration object
+  // Used to store widget settings for each widget index on GUID.
   var settings = [];
 
   // Get url parameter
@@ -82,7 +86,7 @@ var finurligeFaktaWidget = (function() {
     if (params.guid !== null) {
       getFactData(params);
     } else {
-      jQ.getJSON(fff.getGuid, function(rtnjson) {
+      jQ.getJSON(fff.domain + "?method=getGuid&callback=?", function(rtnjson) {
         params.guid = rtnjson.guid;
         // @todo: Add check for existing guids
         getFactData(params);
@@ -157,7 +161,7 @@ var finurligeFaktaWidget = (function() {
         params.guid = fff.baseGuid;
       }
       // Merge default configuration into params.
-      params = jQ.extend({}, configuration, params);
+      params = jQ.extend({}, options, params);
 
       // Activate the widget.
       widget(params);
@@ -203,13 +207,21 @@ var finurligeFaktaWidget = (function() {
       return;
     }
     var jQ = jQuery.noConflict(true);
+    // Start the widget parsing in jQuery 1.4.0.
     jQ(document).ready(function() {
-      // Init the widget parsing in jQuery 1.4.
       finurligeFaktaWidget.init(jQ);
     });
   }
 
-  // Load jQuery 1.4.0 as thats the first known version to support jsonp as we 
-  // uses it in the widgets to load facts.
-  addLibs();
+  // Load jQuery 1.4.0 as thats the first known version to support jsonp as we
+  // uses it in the widgets to load facts. But only if an newer version is not
+  // found.
+  if (typeof(jQuery) !== "undefined" && parseFloat(jQuery.fn.jquery) >= 1.4) {
+    jQuery(document).ready(function() {
+      finurligeFaktaWidget.init(jQuery);
+    });
+  }
+  else {
+    addLibs();
+  }
 })();
