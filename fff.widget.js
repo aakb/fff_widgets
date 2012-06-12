@@ -85,7 +85,7 @@ var finurligeFaktaWidget = (function() {
     }
 
     this.insert = function insert() {
-      this.widget.appendTo(jQ(this.params.target));
+      jQ(this.params.target).html(this.widget);
       this.show();
     }
 
