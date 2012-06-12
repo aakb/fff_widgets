@@ -69,7 +69,7 @@ This is an example on the JavaScript that you can insert into your site to use F
 
   (function() {
     var fff = document.createElement('script'); fff.type = 'text/javascript'; fff.async = true;
-    fff.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'service.finurligefakta.local/fff.widget.js';
+    fff.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'service.finurligefakta.dk/widgets/fff.widget.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fff, s);
   })();
 
