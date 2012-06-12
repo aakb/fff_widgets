@@ -3,8 +3,19 @@
 ## Webservices
 The web service offers the following methods:
 
-1. getFact
-2. getGuid
+1. getGuid
+2. getFact
+
+## getGuid
+Returns a random GUID matching a published fact object.
+
+### Call
+    ?method=getGuid&callback=parseJson
+
+### Response (JSON)
+```javascript
+{"guid":"1"}
+```
 
 ## getfact 
 Returns a fact object from a GUID as a JSON-P response.
@@ -39,23 +50,12 @@ Returns a fact object from a GUID as a JSON-P response.
 }
 ```
 
-## getFact
-Returns a random GUID matching a published fact object.
+## Inserting a widget
 
-### Call
-    ?method=getGuid&callback=parseJson
 
-### Response (JSON)
-```javascript
-{"guid":"1"}
-```
+### Configuration script
+This is an example on the JavaScript that you can insert into your site to use Finurlig Facts.
 
-## JSON-P Example
-```javascript
-factWidgetLoad('{"facts":[{"guid":423,"title":"Kakao-cola?","date":"23-03-2012T14:33:00Z+1000","author":"Kristensen,Jesper","content":"<p>Vidste du, at ordet 'karat' har vandret fra græsk til arabisk til spansk til resten af Europa, og undervejs har skiftet betydning&nbsp; fra 'lille horn' til 'johannesbrød(kerne)' til 'vægtenhed for guld og sølv' til 'positiv værdi'?</p>","source":{"uri":"http://finurligefakta.dk/&q=1234","text":"Link text"},"inspiration":{"uri":"","text":""},"keywords":["overtro","teatre"]}]}');
-```
-
-## Configuration script
 ```html
 <!-- FFF Widget Code - So far does nothing :-) -->
 <script type="text/javascript">
@@ -75,3 +75,20 @@ factWidgetLoad('{"facts":[{"guid":423,"title":"Kakao-cola?","date":"23-03-2012T1
 
 </script>
 ```
+
+### Configuration
+
+``` javasxript
+var fffWidgetConfig = [];
+  fffWidgetConfig.push({
+    "widget" : "interactive",
+    "target" : "#widget1",
+    "style"  : "full"
+  });
+```
+
+#### Widget types
+1. interactive
+
+#### Styles
+1. full
