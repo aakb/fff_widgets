@@ -25,7 +25,7 @@ Returns a fact object from a GUID as a JSON-P response.
 
 ### Reponse (JSON)
 ```javascript
-{
+parseJson({
   "guid": "1",
   "title": "Cheers Miss Sophie!",
   "author": "M. Krogbæk Aarhus Kommunes Biblioteker",
@@ -47,7 +47,7 @@ Returns a fact object from a GUID as a JSON-P response.
     "Popkultur",
     "Tv"
   ]
-}
+})
 ```
 
 ## Inserting a widget
