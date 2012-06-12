@@ -21,7 +21,7 @@ var finurligeFaktaWidget = (function() {
 
   // Used to store widget settings for each widget index on GUID.
   var settings = [];
-  
+
   // jQuery 1.4 or newer, so use this through out the object.
   var jQ;
 
@@ -37,24 +37,24 @@ var finurligeFaktaWidget = (function() {
     this.widget = '';
     this.data = {};
     this.params = {};
-    
+
     this.init = function init(data, params) {
       this.data = data;
       this.params = params;
-      
-      this.build();                        
+
+      this.build();
       this.style();
     }
-    
+
     this.build = function build() {
       this.widget = jQ("<div/>", {"class" : "fffW-interactive fffW-widget"})
                       .append(jQ("<div />", {"class" : "fffW-innerwrapper"})
                                 .append(jQ("<h2 />", {"class" : "fffW-title", "text"  : this.data.title}))
                                 .append(jQ("<div />", {"class" : "fffW-text"})
                                           .append(this.data.content)
-                                      )                                
+                                      )
                             );
-      
+
       // Check if reload button should be attached.
       if (this.params.button.reload) {
         var self = this;
@@ -68,50 +68,73 @@ var finurligeFaktaWidget = (function() {
           getGuid(self.params);
         });
       }
+
+      // Make sure that it now shown yet.
+      this.widget.hide();
     }
-    
-    // Apply some styling to the widget and add extra information based on 
+
+    // Apply some styling to the widget and add extra information based on
     // style.
     this.style = function style() {
       if (this.params.style === 'minimal') {
 
       }
       else if (this.params.style == 'full') {
-        
+
       }
     }
-    
+
+    this.insert = function insert() {
+      this.widget.appendTo(jQ(this.params.target));
+      this.show();
+    }
+
     this.reload = function reload(data) {
       var self = this;
       self.data = data;
-      self.widget.slideUp("fast", function() {
+      self.hide(function () {
         jQ('.fffW-title', self.widget).text(self.data.title);
         jQ('.fffW-text', self.widget).html(self.data.content);
-        self.widget.slideDown("fast");        
+        self.show();
       });
     }
-    
-    // Default insertion of the widget.
-    this.insert = function insert(target) {
-      this.widget.appendTo(jQ(target));
+
+    // Hide the widget for the user.
+    this.hide = function hide(callback) {
+      this.widget.hide(0, function() {
+        if (callback) {
+          callback();
+        }
+      });
+    }
+
+    // Display the widget for the user.
+    this.show = function show(callback) {
+      this.widget.show(0, function() {
+        if (callback) {
+          callback();
+        }
+      });
     }
   }
-   
-  // Interactive inherit from widget
+
+  /*
+   * Interactive inherit from widget
+   */
   function InteractiveWidget() {}
   InteractiveWidget.prototype = new Widget();
-  
-  // Override insert method.
-  InteractiveWidget.prototype.insert = function() {
-    this.widget.hide()
-               .appendTo(jQ(this.params.target))
-               .slideDown("fast");
+
+  // Override show method.
+  InteractiveWidget.prototype.show = function() {
+    this.widget.fadeIn();
   };
-  
-  // Override reload method.
-//  InteractiveWidget.prototype.reload = function() {
-//    alert('new reload');
-//  }
+
+  // Override hide method.
+  InteractiveWidget.prototype.hide = function(callback) {
+    this.widget.fadeOut(function () {
+      callback();
+    });
+  };
 
   // ----- / Create Widgets -----
   function getGuid(params) {
@@ -161,7 +184,7 @@ var finurligeFaktaWidget = (function() {
         widget = new InteractiveWidget();
         widget.init(data, params);
         widget.insert();
-        
+
         break;
 
       case 'slidein':
