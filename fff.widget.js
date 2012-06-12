@@ -16,7 +16,8 @@ var finurligeFaktaWidget = (function() {
     'style' : 'none',
     'button' : {
       'reload' : true
-    }
+    },
+    'loadComplet' : null
   };
 
   // Used to store widget settings for each widget index on GUID.
@@ -86,6 +87,13 @@ var finurligeFaktaWidget = (function() {
 
     this.insert = function insert() {
       jQ(this.params.target).html(this.widget);
+
+      // Fire loadComplet event.
+      if (this.params.loadComplet !== null) {
+        this.params.loadComplet();
+      }
+
+      // Show the widget.
       this.show();
     }
 
