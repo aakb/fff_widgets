@@ -1,4 +1,4 @@
-// Your code goes here.
+
 var finurligeFaktaWidget = (function() {
   "use strict";
 
@@ -10,19 +10,20 @@ var finurligeFaktaWidget = (function() {
 
   // Defaul conifguration options.
   var options = {
+    'callback' : 'finurligeFaktaWidget.load',
     'widget' : 'interactive',
     'target' : '#fffwidget',
-    'style' : 'full',
+    'style' : 'none',
     'button' : {
       'reload' : true
     }
   };
 
-  // jQuery 1.4 or newer, so use this through the code.
-  var jQ;
-
   // Used to store widget settings for each widget index on GUID.
   var settings = [];
+  
+  // jQuery 1.4 or newer, so use this through out the object.
+  var jQ;
 
   // Get url parameter
   function getParameterByName(name) {
@@ -31,58 +32,89 @@ var finurligeFaktaWidget = (function() {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
   }
 
-  // ----- / Define widgets -----
-  // Interactive widget
-  function interactiveWidget(data, params) {
-    // Create wrapper for mobile menu.
-    var $widget = jQ("<div />", {
-      "class" : "fffW-interactive fffW-widget"
-    })
-    .append(
-      jQ("<div />", {
-        "class" : "fffW-innerwrapper"
-      })
-      .append(jQ("<h2 />", {
-        "class" : "fffW-title",
-        "text"  : data.title
-      }))
-      .append(jQ("<div />", {
-        "class" : "fffW-text"
-      })
-        .append(data.content)
-      )
-      .append(jQ("<span />", {
-        "class" : "fffW-link fffW-source",
-        "text"  : "Kilde: "
-      })
-        .append(jQ("<a />", {
-          "rel"   : "external",
-          "href"  : data.sources[0].url,
-          "text"  : data.sources[0].title
-        }))
-      )
-    );
-    this.element = $widget;
-  }
+  // ----- / Define widget object -----
+  function Widget() {
+    this.widget = '';
+    this.data = {};
+    this.params = {};
+    
+    this.init = function init(data, params) {
+      this.data = data;
+      this.params = params;
+      
+      this.build();                        
+      this.style();
+    }
+    
+    this.build = function build() {
+      this.widget = jQ("<div/>", {"class" : "fffW-interactive fffW-widget"})
+                      .append(jQ("<div />", {"class" : "fffW-innerwrapper"})
+                                .append(jQ("<h2 />", {"class" : "fffW-title", "text"  : this.data.title}))
+                                .append(jQ("<div />", {"class" : "fffW-text"})
+                                          .append(this.data.content)
+                                      )                                
+                            );
+      
+      // Check if reload button should be attached.
+      if (this.params.button.reload) {
+        var self = this;
+        var reload = jQ('<a class="button fffw-button-reload" href="#">Reload</a>');
+        $('.fffW-innerwrapper', this.widget).append(reload);
+        reload.click(function () {
+          // Reset params and save ref. to this widget.
+          self.params.guid = null;
+          self.params.callback = 'finurligeFaktaWidget.reload';
+          jQ(self.params.target).data('widget', self);
+          getGuid(self.params);
+        });
+      }
+    }
+    
+    // Apply some styling to the widget and add extra information based on 
+    // style.
+    this.style = function style() {
+      if (this.params.style === 'minimal') {
 
-  interactiveWidget.prototype.insert = function(target) {
-    this.element.hide()
-                .appendTo(jQ(target))
-                .slideDown("fast");
+      }
+      else if (this.params.style == 'full') {
+        
+      }
+    }
+    
+    this.reload = function reload(data) {
+      var self = this;
+      self.data = data;
+      self.widget.slideUp("fast", function() {
+        jQ('.fffW-title', self.widget).text(self.data.title);
+        jQ('.fffW-text', self.widget).html(self.data.content);
+        self.widget.slideDown("fast");        
+      });
+    }
+    
+    // Default insertion of the widget.
+    this.insert = function insert(target) {
+      this.widget.appendTo(jQ(target));
+    }
+  }
+   
+  // Interactive inherit from widget
+  function InteractiveWidget() {}
+  InteractiveWidget.prototype = new Widget();
+  
+  // Override insert method.
+  InteractiveWidget.prototype.insert = function() {
+    this.widget.hide()
+               .appendTo(jQ(this.params.target))
+               .slideDown("fast");
   };
-
-  // Slidein widgets
-  function slideInWidget(data, params) {
-    this.element = "<p>Output: Interactive Widget</p>";
-  }
-
-  // Mobile widget
-  function mobileWidget(data, params) {
-    this.element = "<p>Output: Interactive Widget</p>";
-  }
+  
+  // Override reload method.
+//  InteractiveWidget.prototype.reload = function() {
+//    alert('new reload');
+//  }
 
   // ----- / Create Widgets -----
-  function widget(params) {
+  function getGuid(params) {
     if (params.guid !== null) {
       getFactData(params);
     } else {
@@ -94,8 +126,15 @@ var finurligeFaktaWidget = (function() {
     }
   }
 
+  // Reload callback that retives the widget and reloads it with new data.
+  function reloadWidget(data) {
+    var params = settings[data.guid];
+    var widget = jQ(params.target).data('widget');
+    widget.reload(data);
+  }
+
   // Get data
- function getFactData(params) {
+  function getFactData(params) {
     var method = "getFact";
 
     // Push parameters to settings object for later retrieval
@@ -107,38 +146,34 @@ var finurligeFaktaWidget = (function() {
       data: {guid: params.guid, method: method},
       dataType: "jsonp",
       jsonp : "callback",
-      jsonpCallback: "finurligeFaktaWidget.load"
+      jsonpCallback: params.callback
     });
   }
 
   // Returns object from json
-  function loadFact(rtnjson) {
-    var data = rtnjson;
+  function loadFact(data) {
     var params = settings[data.guid];
     var widget;
 
     // Call appropriate function to create widget
     switch(params.widget) {
       case 'interactive':
-        widget = new interactiveWidget(data, params);
-        widget.insert(params.target);
+        widget = new InteractiveWidget();
+        widget.init(data, params);
+        widget.insert();
+        
         break;
 
       case 'slidein':
-        widget = new slideInWidget(data, params);
+        widget = new SlideInWidget(data, params);
         widget.insert(params.target);
         break;
 
       case 'mobile':
-        widget = new mobileWidget(data, params);
+        widget = new MobileWidget(data, params);
         widget.insert(params.target);
         break;
     }
-  }
-
-  // Insert widget
-  function insertWidget($widget, target) {
-    var $target = jQ(target);
   }
 
   // Define error handling function
@@ -164,20 +199,24 @@ var finurligeFaktaWidget = (function() {
       params = jQ.extend({}, options, params);
 
       // Activate the widget.
-      widget(params);
+      getGuid(params);
     });
   }
 
   return {
     init: initializeFramework,
     load: loadFact,
+    reload: reloadWidget,
     error: errorHandler
   };
 
 }());
 
-
-// Include JQuery programatically
+/************************************
+ **                                **
+ ** Include JQuery programatically **
+ **                                **
+ ************************************/
 (function() {
   // Don't let the script run forever.
   var attempts = 30;
@@ -192,6 +231,7 @@ var finurligeFaktaWidget = (function() {
       return;
     }
 
+    // Insert jQuery into the page header.
     var node = document.createElement("script");
     node.src = "//ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js";
     head[0].appendChild(node);

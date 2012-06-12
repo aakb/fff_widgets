@@ -92,3 +92,4 @@ var fffWidgetConfig = [];
 
 #### Styles
 1. full
+2. minimal (the one used on http://finurligfakta.dk).
