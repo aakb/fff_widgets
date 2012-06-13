@@ -5,6 +5,7 @@ var finurligeFaktaWidget = (function() {
   // Define global config object
   var fff = {
     'domain' : "//service.finurligefakta.dk/",
+    'widgetDomain' : '//service.finurligefakta.dk/widgets/',
     'baseGuid' : null
   };
 
@@ -93,7 +94,7 @@ var finurligeFaktaWidget = (function() {
 
           // Add CSS @todo make this more dynamic and load based on style and
           // color.
-          jQ('head').append('<link media="all" rel="stylesheet" href="//fff_widgets.leela/css/fffw.full.default.css" type="text/css" />');
+          jQ('head').append('<link media="all" rel="stylesheet" href="' + fff.widgetDomain + 'css/fffw.full.default.css" type="text/css" />');
 
           break;
       }
