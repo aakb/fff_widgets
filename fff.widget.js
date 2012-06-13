@@ -17,7 +17,9 @@ var finurligeFaktaWidget = (function() {
     'button' : {
       'reload' : true
     },
-    'loadComplet' : null
+    'event' : {
+      'loadComplet' : null
+    }
   };
 
   // Used to store widget settings for each widget index on GUID.
@@ -45,7 +47,7 @@ var finurligeFaktaWidget = (function() {
 
       this.build();
       this.style();
-    }
+    };
 
     this.build = function build() {
       this.widget = jQ("<div/>", {"class" : "fffW-interactive fffW-widget"})
@@ -72,7 +74,7 @@ var finurligeFaktaWidget = (function() {
 
       // Make sure that it now shown yet.
       this.widget.hide();
-    }
+    };
 
     // Apply some styling to the widget and add extra information based on
     // style.
@@ -80,22 +82,22 @@ var finurligeFaktaWidget = (function() {
       if (this.params.style === 'minimal') {
 
       }
-      else if (this.params.style == 'full') {
+      else if (this.params.style === 'full') {
 
       }
-    }
+    };
 
     this.insert = function insert() {
       jQ(this.params.target).html(this.widget);
 
       // Fire loadComplet event.
-      if (this.params.loadComplet !== null) {
-        this.params.loadComplet();
+      if (this.params.event.loadComplet !== null) {
+        this.params.event.loadComplet();
       }
 
       // Show the widget.
       this.show();
-    }
+    };
 
     this.reload = function reload(data) {
       var self = this;
@@ -105,7 +107,7 @@ var finurligeFaktaWidget = (function() {
         jQ('.fffW-text', self.widget).html(self.data.content);
         self.show();
       });
-    }
+    };
 
     // Hide the widget for the user.
     this.hide = function hide(callback) {
@@ -114,7 +116,7 @@ var finurligeFaktaWidget = (function() {
           callback();
         }
       });
-    }
+    };
 
     // Display the widget for the user.
     this.show = function show(callback) {
@@ -123,7 +125,7 @@ var finurligeFaktaWidget = (function() {
           callback();
         }
       });
-    }
+    };
   }
 
   /*
@@ -195,15 +197,15 @@ var finurligeFaktaWidget = (function() {
 
         break;
 
-      case 'slidein':
-        widget = new SlideInWidget(data, params);
-        widget.insert(params.target);
-        break;
-
-      case 'mobile':
-        widget = new MobileWidget(data, params);
-        widget.insert(params.target);
-        break;
+//      case 'slidein':
+//        widget = new SlideInWidget(data, params);
+//        widget.insert(params.target);
+//        break;
+//
+//      case 'mobile':
+//        widget = new MobileWidget(data, params);
+//        widget.insert(params.target);
+//        break;
     }
   }
 
@@ -249,13 +251,15 @@ var finurligeFaktaWidget = (function() {
  **                                **
  ************************************/
 (function() {
+   "use strict";
+   
   // Don't let the script run forever.
   var attempts = 30;
 
   var addLibs = function() {
     // Try to insert jQuery into the header.
     var head = document.getElementsByTagName("head");
-    if (head.length == 0) {
+    if (head.length === 0) {
       if (attempts-- > 0) {
         setTimeout(addLibs, 100);
       }
@@ -267,7 +271,7 @@ var finurligeFaktaWidget = (function() {
     node.src = "//ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js";
     head[0].appendChild(node);
     checkLibs();
-  }
+  };
 
   var checkLibs = function() {
     if (typeof(jQuery) === "undefined" || parseFloat(jQuery.fn.jquery) < 1.4) {
@@ -282,7 +286,7 @@ var finurligeFaktaWidget = (function() {
     jQ(document).ready(function() {
       finurligeFaktaWidget.init(jQ);
     });
-  }
+  };
 
   // Load jQuery 1.4.0 as thats the first known version to support jsonp as we
   // uses it in the widgets to load facts. But only if an newer version is not
