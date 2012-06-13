@@ -85,11 +85,11 @@ var finurligeFaktaWidget = (function() {
         case 'full':
           // Add source link(s).
           var external = jQ('<div />', {'class' : 'fffw-external-links'});
-          $('.fffW-innerwrapper', this.widget).append(external);
+          jQ('.fffW-innerwrapper', this.widget).append(external);
           external.append(this.sourceLinks());
 
           // Add logo placeholder.
-          $('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');
+          jQ('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');
 
           // Add CSS @todo make this more dynamic and load based on style and
           // color.
@@ -133,7 +133,7 @@ var finurligeFaktaWidget = (function() {
         jQ('.fffW-text', self.widget).html(self.data.content);
 
         // Update source links.
-        $('.fffw-external-links', self.widget).html(self.sourceLinks());
+        jQ('.fffw-external-links', self.widget).html(self.sourceLinks());
 
         self.show();
       });
