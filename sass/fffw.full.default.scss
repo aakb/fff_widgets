@@ -1,0 +1,43 @@
+@import "compass/css3";
+@import "compass/utilities";
+@import "variables.scss";
+@import "typography.scss";
+
+$boxWidth: 192px;
+
+.fffW-widget {
+  padding: 10px;
+  border: 8px solid #dfdfdf;
+  width: $boxWidth;
+  font-size: 14px;
+  .fffw-logo {    
+    background: transparent no-repeat url('../images/widget_logo_full.png') 0 0;
+    display: block;
+    height: 40px;
+    width: 85px;
+  }
+  .fffW-title {
+    font-size: 22px;
+    margin: 18px 0px;
+  }
+  .fffw-button-reload {
+    background: transparent no-repeat url('../images/widget_reload_full.png') right 0;
+    display: block;
+    height: 30px;
+    left: 50%;
+    margin: 18px 0 18px -10px;
+    overflow: hidden;
+    position: relative;
+    text-indent: -9999px;
+    width: 54%;
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+      outline: 0;
+    }
+  }
+  .fffw-external-links {
+    font-size: 12px;
+  }
+}

@@ -44,7 +44,6 @@ var finurligeFaktaWidget = (function() {
     this.init = function init(data, params) {
       this.data = data;
       this.params = params;
-
       this.build();
       this.style();
     };
@@ -61,7 +60,7 @@ var finurligeFaktaWidget = (function() {
       // Check if reload button should be attached.
       if (this.params.button.reload) {
         var self = this;
-        var reload = jQ('<a class="button fffw-button-reload" href="#">Reload</a>');
+        var reload = jQ('<a class="fffw-button fffw-button-reload" href="#">Reload</a>');
         jQ('.fffW-innerwrapper', this.widget).append(reload);
         reload.click(function () {
           // Reset params and save ref. to this widget.
@@ -79,14 +78,39 @@ var finurligeFaktaWidget = (function() {
     // Apply some styling to the widget and add extra information based on
     // style.
     this.style = function style() {
-      if (this.params.style === 'minimal') {
+      switch (this.params.style) {
+        case 'minimal':
+          break;
 
-      }
-      else if (this.params.style === 'full') {
+        case 'full':
+          // Add source link(s).
+          var external = jQ('<div />', {'class' : 'fffw-external-links'});
+          $('.fffW-innerwrapper', this.widget).append(external);
+          external.append(this.sourceLinks());
 
+          // Add logo placeholder.
+          $('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');
+
+          // Add CSS @todo make this more dynamic and load based on style and
+          // color.
+          jQ('head').append('<link media="all" rel="stylesheet" href="//fff_widgets.leela/css/fffw.full.default.css" type="text/css" />');
+
+          break;
       }
     };
 
+    this.sourceLinks = function sourceLinks() {
+      var sources = jQ("<span />", {'class' : 'fffW-link fffW-source', 'text' : 'Læs mere: '});
+      for (var i in this.data.sources) {
+        sources.append(jQ("<a />", {'class' : 'fffw-link fffw-source',
+                                      'rel' : 'external',
+                                      'href' : this.data.sources[i].url,
+                                      'text' : this.data.sources[i].title}));
+      }
+      return sources;
+    };
+
+    // Insert the widget and fire loadComplet event.
     this.insert = function insert() {
       jQ(this.params.target).html(this.widget);
 
@@ -99,12 +123,18 @@ var finurligeFaktaWidget = (function() {
       this.show();
     };
 
+    // Reload the widget with new fact from the data parameter.
     this.reload = function reload(data) {
       var self = this;
       self.data = data;
       self.hide(function () {
+        // Update title and text.
         jQ('.fffW-title', self.widget).text(self.data.title);
         jQ('.fffW-text', self.widget).html(self.data.content);
+
+        // Update source links.
+        $('.fffw-external-links', self.widget).html(self.sourceLinks());
+
         self.show();
       });
     };
@@ -128,7 +158,7 @@ var finurligeFaktaWidget = (function() {
     };
   }
 
-  /*
+  /************
    * Interactive inherit from widget
    */
   function InteractiveWidget() {}
@@ -189,7 +219,7 @@ var finurligeFaktaWidget = (function() {
     var widget;
 
     // Call appropriate function to create widget
-    switch(params.widget) {
+    switch (params.widget) {
       case 'interactive':
         widget = new InteractiveWidget();
         widget.init(data, params);
@@ -252,7 +282,7 @@ var finurligeFaktaWidget = (function() {
  ************************************/
 (function() {
    "use strict";
-   
+
   // Don't let the script run forever.
   var attempts = 30;
 
