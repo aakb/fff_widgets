@@ -63,7 +63,10 @@ var finurligeFaktaWidget = (function() {
         var self = this;
         var reload = jQ('<a class="fffw-button fffw-button-reload" href="#">Reload</a>');
         jQ('.fffW-innerwrapper', this.widget).append(reload);
-        reload.click(function () {
+        reload.click(function (event) {
+          event.stopPropagation();
+          event.preventDefault();
+
           // Reset params and save ref. to this widget.
           self.params.guid = null;
           self.params.callback = 'finurligeFaktaWidget.reload';
