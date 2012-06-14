@@ -38,8 +38,9 @@
 /* line 37, ../sass/fffw.full.default.scss */
 .fffW-widget .fffw-button-reload:link, .fffW-widget .fffw-button-reload:visited, .fffW-widget .fffw-button-reload:hover, .fffW-widget .fffw-button-reload:active {
   outline: 0;
+  cursor: pointer;
 }
-/* line 41, ../sass/fffw.full.default.scss */
+/* line 42, ../sass/fffw.full.default.scss */
 .fffW-widget .fffw-external-links {
   font-size: 12px;
 }
