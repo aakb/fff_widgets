@@ -38,7 +38,9 @@ $boxWidth: 192px;
       cursor: pointer;
     }
     &:hover {
-      background: transparent no-repeat $image_reload_url -105px 0;     
+      background: transparent no-repeat $image_reload_url -105px 0;
+      outline: 0;
+      cursor: pointer;
     }
   }
   .fffw-external-links {

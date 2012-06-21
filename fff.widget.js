@@ -87,6 +87,11 @@ var finurligeFaktaWidget = (function() {
     this.style = function style() {
       switch (this.params.style.type) {
         case 'minimal':
+          
+          break;
+
+        case 'normal':
+          
           break;
 
         case 'full':

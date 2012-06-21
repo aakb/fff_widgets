@@ -43,8 +43,10 @@
 /* line 40, ../sass/fffw-interactive.full.scss */
 .fffW-widget .fffw-button-reload:hover {
   background: transparent no-repeat url("../images/widget_reload_FF_gr.png") -105px 0;
+  outline: 0;
+  cursor: pointer;
 }
-/* line 44, ../sass/fffw-interactive.full.scss */
+/* line 46, ../sass/fffw-interactive.full.scss */
 .fffW-widget .fffw-external-links {
   font-size: 12px;
 }
