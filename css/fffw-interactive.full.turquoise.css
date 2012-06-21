@@ -1,0 +1,50 @@
+/* line 5, ../sass/typography.scss */
+.fffW-widget {
+  font-family: "helvetica, arial sans-serif";
+}
+
+/* line 8, ../sass/fffw-interactive.full.scss */
+.fffW-widget {
+  margin: 10px 0;
+  padding: 10px;
+  border: 8px solid #dfdfdf;
+  width: 192px;
+  font-size: 14px;
+}
+/* line 14, ../sass/fffw-interactive.full.scss */
+.fffW-widget .fffw-logo {
+  background: transparent no-repeat url("../images/widget_logo_FF_bl.png") 0 0;
+  display: block;
+  height: 40px;
+  width: 85px;
+}
+/* line 20, ../sass/fffw-interactive.full.scss */
+.fffW-widget .fffW-title {
+  font-size: 22px;
+  margin: 18px 0px;
+}
+/* line 24, ../sass/fffw-interactive.full.scss */
+.fffW-widget .fffw-button-reload {
+  background: transparent no-repeat url("../images/widget_reload_FF_bl.png") left 0;
+  display: block;
+  height: 30px;
+  left: 50%;
+  margin: 18px 0 18px -10px;
+  overflow: hidden;
+  position: relative;
+  text-indent: -9999px;
+  width: 54%;
+}
+/* line 36, ../sass/fffw-interactive.full.scss */
+.fffW-widget .fffw-button-reload:link, .fffW-widget .fffw-button-reload:visited, .fffW-widget .fffw-button-reload:active {
+  outline: 0;
+  cursor: pointer;
+}
+/* line 40, ../sass/fffw-interactive.full.scss */
+.fffW-widget .fffw-button-reload:hover {
+  background: transparent no-repeat url("../images/widget_reload_FF_bl.png") -105px 0;
+}
+/* line 44, ../sass/fffw-interactive.full.scss */
+.fffW-widget .fffw-external-links {
+  font-size: 12px;
+}

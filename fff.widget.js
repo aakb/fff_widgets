@@ -14,7 +14,10 @@ var finurligeFaktaWidget = (function() {
     'callback' : 'finurligeFaktaWidget.load',
     'widget' : 'interactive',
     'target' : '#fffwidget',
-    'style' : 'none',
+    'style' : {
+      'type' : 'default',
+      'color' : 'default'
+    },
     'button' : {
       'reload' : true
     },
@@ -82,7 +85,7 @@ var finurligeFaktaWidget = (function() {
     // Apply some styling to the widget and add extra information based on
     // style.
     this.style = function style() {
-      switch (this.params.style) {
+      switch (this.params.style.type) {
         case 'minimal':
           break;
 
@@ -97,7 +100,8 @@ var finurligeFaktaWidget = (function() {
 
           // Add CSS @todo make this more dynamic and load based on style and
           // color.
-          jQ('head').append('<link media="all" rel="stylesheet" href="' + fff.widgetDomain + 'css/fffw.full.default.css" type="text/css" />');
+          var css = fff.widgetDomain + 'css/fffw-' + this.params.widget + '.full.' + this.params.style.color + '.css';
+          jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
 
           break;
       }
@@ -264,6 +268,14 @@ var finurligeFaktaWidget = (function() {
       }
       // Merge default configuration into params.
       params = jQ.extend({}, options, params);
+
+      // Fix default style.
+      if (!params.style.color) {
+        params.style.color = 'default';
+      }
+      if (!params.style.type) {
+        params.style.type = 'default';
+      }
 
       // Activate the widget.
       getGuid(params);
