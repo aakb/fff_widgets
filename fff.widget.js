@@ -87,11 +87,11 @@ var finurligeFaktaWidget = (function() {
     this.style = function style() {
       switch (this.params.style.type) {
         case 'minimal':
-          
+
           break;
 
         case 'normal':
-          
+
           break;
 
         case 'full':
@@ -189,6 +189,46 @@ var finurligeFaktaWidget = (function() {
     });
   };
 
+  /************
+   * Slide in widget inherit from widget
+   */
+  function SlideInWidget() {}
+  SlideInWidget.prototype = new Widget();
+
+  // Create target div to insert the widget into.
+  SlideInWidget.prototype.createTarget = function() {
+    var target;
+    if (this.params.target.charAt(0) === '#') {
+      target = jQ('<div />', { 'id' : this.params.target.substring(1) });
+    }
+    else {
+      target = jQ('<div />', { 'class' : this.params.target.substring(1) });
+    }
+    jQ('body').append(target);
+  }
+
+  // Override show method.
+  SlideInWidget.prototype.show = function() {
+    var self = this;
+
+    // If the page is reload when at the buttom slide it in now.
+    if ($(window).height() + $("html").scrollTop() == $(document).height() - 1) {
+      this.slideIn();
+    }
+
+    // Hook into the scroll event and slide in when bottom reached.
+    $(window).scroll(function() {
+      if ($(window).height() + $("html").scrollTop() == $(document).height() - 1) {
+        self.slideIn();
+      }
+    });
+  };
+
+  // Implementation of slide in aninmation.
+  SlideInWidget.prototype.slideIn = function() {
+    this.widget.fadeIn();
+  }
+
   // ----- / Create Widgets -----
   function getGuid(params) {
     if (params.guid !== null) {
@@ -237,18 +277,22 @@ var finurligeFaktaWidget = (function() {
         widget = new InteractiveWidget();
         widget.init(data, params);
         widget.insert();
-
         break;
 
-//      case 'slidein':
-//        widget = new SlideInWidget(data, params);
-//        widget.insert(params.target);
-//        break;
-//
+      case 'slidein':
+        widget = new SlideInWidget();
+        widget.init(data, params);
+        widget.createTarget();
+        widget.insert();
+        break;
+
 //      case 'mobile':
 //        widget = new MobileWidget(data, params);
 //        widget.insert(params.target);
 //        break;
+      default:
+        alert('Widget type is not supported');
+        break;
     }
   }
 
@@ -268,9 +312,9 @@ var finurligeFaktaWidget = (function() {
     // Start creating some widgets
     // Loop through configuration array
     jQ.each(fffWidgetConfig, function(i, params) {
-      if (params.widget === "interactive") {
-        params.guid = fff.baseGuid;
-      }
+      // Legacy, what was the idea (force load content) ?
+      params.guid = fff.baseGuid;
+
       // Merge default configuration into params.
       params = jQ.extend({}, options, params);
 
