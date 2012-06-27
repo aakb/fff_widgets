@@ -91,7 +91,7 @@ var finurligeFaktaWidget = (function() {
           break;
 
         case 'normal':
-
+          alert('This style normal have not been implemented yet, please use full widgets.');
           break;
 
         case 'full':
@@ -114,7 +114,7 @@ var finurligeFaktaWidget = (function() {
 
     this.sourceLinks = function sourceLinks() {
       var sources = jQ("<span />", {'class' : 'fffW-link fffW-source', 'text' : 'Læs mere: '});
-      for (var i = 0; i < this.data.sources.lenght; i++) {
+      for (var i in this.data.sources) {
         sources.append(jQ("<a />", {'class' : 'fffw-link fffw-source',
                                       'rel' : 'external',
                                       'href' : this.data.sources[i].url,
@@ -226,7 +226,10 @@ var finurligeFaktaWidget = (function() {
 
   // Implementation of slide in aninmation.
   SlideInWidget.prototype.slideIn = function() {
-    this.widget.fadeIn();
+    var self = this;
+    this.widget.fadeIn(function() {
+      alert(self.widget.outerHeight(true));
+    });
   };
 
   // ----- / Create Widgets -----
@@ -287,14 +290,9 @@ var finurligeFaktaWidget = (function() {
         break;
 
       default:
-//        alert('Widget type is not supported');
+        alert('Widget type is not supported');
         break;
     }
-  }
-
-  // Define error handling function
-  function errorHandler(rtnjson) {
-//    alert(rtnjson.msg);
   }
 
   function initializeFramework(ncjQuery) {
@@ -331,7 +329,6 @@ var finurligeFaktaWidget = (function() {
     init: initializeFramework,
     load: loadFact,
     reload: reloadWidget,
-    error: errorHandler
   };
 
 }());
