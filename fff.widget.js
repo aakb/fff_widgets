@@ -56,7 +56,7 @@ var finurligeFaktaWidget = (function() {
       this.widget = jQ("<div/>", {"class" : "fffW-interactive fffW-widget"})
                       .append(jQ("<div />", {"class" : "fffW-innerwrapper"})
                                 .append(jQ("<h2 />", {"class" : "fffW-title", "text"  : this.data.title}))
-                                .append(jQ("<div />", {"class" : "fffW-text"})
+                                .append(jQ("<p />", {"class" : "fffW-text"})
                                           .append(this.data.content)
                                       )
                             );
@@ -228,7 +228,7 @@ var finurligeFaktaWidget = (function() {
   SlideInWidget.prototype.slideIn = function() {
     var self = this;
     this.widget.fadeIn(function() {
-      alert(self.widget.outerHeight(true));
+//      alert(self.widget.outerHeight(true));
     });
   };
 
