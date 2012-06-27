@@ -1,4 +1,3 @@
-
 var finurligeFaktaWidget = (function() {
   "use strict";
 
@@ -18,6 +17,7 @@ var finurligeFaktaWidget = (function() {
       'type' : 'default',
       'color' : 'default'
     },
+    'tracking' : true,
     'button' : {
       'reload' : true
     },
@@ -114,7 +114,7 @@ var finurligeFaktaWidget = (function() {
 
     this.sourceLinks = function sourceLinks() {
       var sources = jQ("<span />", {'class' : 'fffW-link fffW-source', 'text' : 'Læs mere: '});
-      for (var i in this.data.sources) {
+      for (var i = 0; i < this.data.sources.lenght; i++) {
         sources.append(jQ("<a />", {'class' : 'fffw-link fffw-source',
                                       'rel' : 'external',
                                       'href' : this.data.sources[i].url,
@@ -205,20 +205,20 @@ var finurligeFaktaWidget = (function() {
       target = jQ('<div />', { 'class' : this.params.target.substring(1) });
     }
     jQ('body').append(target);
-  }
+  };
 
   // Override show method.
   SlideInWidget.prototype.show = function() {
     var self = this;
 
     // If the page is reload when at the buttom slide it in now.
-    if ($(window).height() + $("html").scrollTop() == $(document).height() - 1) {
+    if ($(window).height() + $("html").scrollTop() === $(document).height() - 1) {
       this.slideIn();
     }
 
     // Hook into the scroll event and slide in when bottom reached.
     $(window).scroll(function() {
-      if ($(window).height() + $("html").scrollTop() == $(document).height() - 1) {
+      if ($(window).height() + $("html").scrollTop() === $(document).height() - 1) {
         self.slideIn();
       }
     });
@@ -227,7 +227,7 @@ var finurligeFaktaWidget = (function() {
   // Implementation of slide in aninmation.
   SlideInWidget.prototype.slideIn = function() {
     this.widget.fadeIn();
-  }
+  };
 
   // ----- / Create Widgets -----
   function getGuid(params) {
@@ -286,19 +286,15 @@ var finurligeFaktaWidget = (function() {
         widget.insert();
         break;
 
-//      case 'mobile':
-//        widget = new MobileWidget(data, params);
-//        widget.insert(params.target);
-//        break;
       default:
-        alert('Widget type is not supported');
+//        alert('Widget type is not supported');
         break;
     }
   }
 
   // Define error handling function
   function errorHandler(rtnjson) {
-    alert(rtnjson.msg);
+//    alert(rtnjson.msg);
   }
 
   function initializeFramework(ncjQuery) {
