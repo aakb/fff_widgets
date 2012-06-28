@@ -1,6 +1,30 @@
-/* line 5, ../sass/typography.scss */
+@font-face {
+  font-family: "akaDora";
+  src: url(/widgets/css/fonts/akaDora/akaDora.eot);
+  src: url(/widgets/css/fonts/akaDora/akaDora.eot?#iefix) format('eot'), url(/widgets/css/fonts/akaDora/akaDora.woff) format('woff'), url(/widgets/css/fonts/akaDora/akaDora.ttf) format('truetype'), url(/widgets/css/fonts/akaDora/akaDora.svg) format('svg');
+  font-weight: "normal";
+  font-style: "normal";
+}
+
+@font-face {
+  font-family: "PTSansRegular";
+  src: url(/widgets/css/fonts/ptSans/PTS55F-webfont.eot);
+  src: url(/widgets/css/fonts/ptSans/PTS55F-webfont.eot?#iefix) format('eot'), url(/widgets/css/fonts/ptSans/PTS55F-webfont.woff) format('woff'), url(/widgets/css/fonts/ptSans/PTS55F-webfont.ttf) format('truetype'), url(/widgets/css/fonts/ptSans/PTS55F-webfont.svg) format('svg');
+  font-weight: "normal";
+  font-style: "normal";
+}
+
+@font-face {
+  font-family: "mgOpenModerna";
+  src: url('/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.eot');
+  src: url('/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.eot?#iefix') format('eot'), url(/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.woff) format('woff'), url(/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.ttf) format('truetype'), url(/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.svg) format('svg');
+  font-weight: "bold";
+  font-style: "bold";
+}
+
+/* line 9, ../sass/typography.scss */
 .fffW-widget {
-  font-family: "helvetica, arial sans-serif";
+  font-family: "PTSansRegular";
 }
 
 /* line 9, ../sass/fffw-slidein.full.scss */

@@ -3,13 +3,10 @@
 @import "variables.scss";
 @import "typography.scss";
 
-$boxWidth: 192px;
-
 .fffW-widget {
   margin: 10px 0;
   padding: 10px;
   border: 8px solid #dfdfdf;
-  width: $boxWidth;
   font-size: 14px;
   .fffw-logo {    
     background: transparent no-repeat $image_logo_url 0 0;
@@ -22,15 +19,16 @@ $boxWidth: 192px;
     margin: 18px 0px;
   }
   .fffw-button-reload {
+    position: relative;
+    float: right;
+    top: -30px;
     background: transparent no-repeat $image_reload_url left 0;
     display: block;
-    height: 30px;
-    left: 50%;
-    margin: 18px 0 18px -10px;
+    height: 26px;
+    width: 32px;
     overflow: hidden;
     position: relative;
     text-indent: -9999px;
-    width: 54%;
     &:link,
     &:visited,
     &:active {
@@ -38,7 +36,7 @@ $boxWidth: 192px;
       cursor: pointer;
     }
     &:hover {
-      background: transparent no-repeat $image_reload_url -105px 0;
+      background: transparent no-repeat $image_reload_url -32px 0;
       outline: 0;
       cursor: pointer;
     }

@@ -65,8 +65,8 @@ var finurligeFaktaWidget = (function() {
       // Check if reload button should be attached.
       if (this.params.button.reload) {
         var self = this;
-        var reload = jQ('<a class="fffw-button fffw-button-reload" href="#">Reload</a>');
-        jQ('.fffW-innerwrapper', this.widget).append(reload);
+        var reload = jQ('<a class="fffw-button fffw-button-reload" href="#">Indlæs et nyt faktum</a>');
+        jQ('.fffW-innerwrapper', this.widget).prepend(reload);
         reload.click(function (event) {
           event.stopPropagation();
           event.preventDefault();
@@ -243,11 +243,11 @@ var finurligeFaktaWidget = (function() {
       });
     }
     else {
-      $('.fffW-slidein').animate({
+      jQ('.fffW-slidein').animate({
         width : '0px',
       }, {
         complete : function() {
-          $('.fffW-slidein').removeClass('active');
+          jQ('.fffW-slidein').removeClass('active');
           if (callback) {
             callback();
           }
@@ -265,7 +265,7 @@ var finurligeFaktaWidget = (function() {
       self.reloaded = false;
     }
     else {
-      var slideIn = $('.fffW-slidein');
+      var slideIn = jQ('.fffW-slidein');
       if (!slideIn.hasClass('active')) {
         // The widget have not been slide in, so do it.
         self.widget.show();
