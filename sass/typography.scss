@@ -7,5 +7,5 @@
 @include font-face("mgOpenModerna", font-files("/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.woff", "/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.ttf", "/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.svg"), "mgOpenModerna/mgopenmodernabold-webfont.eot", 'bold', 'bold');
 
 .fffW-widget {
-  font-family: "PTSansRegular";
+  font-family: PTSansRegular, helvetica, arial sans-serif;
 }

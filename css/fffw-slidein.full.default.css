@@ -24,7 +24,7 @@
 
 /* line 9, ../sass/typography.scss */
 .fffW-widget {
-  font-family: "PTSansRegular";
+  font-family: PTSansRegular, helvetica, arial sans-serif;
 }
 
 /* line 9, ../sass/fffw-slidein.full.scss */

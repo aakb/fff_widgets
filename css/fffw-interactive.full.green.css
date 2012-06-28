@@ -24,7 +24,7 @@
 
 /* line 9, ../sass/typography.scss */
 .fffW-widget {
-  font-family: "PTSansRegular";
+  font-family: PTSansRegular, helvetica, arial sans-serif;
 }
 
 /* line 6, ../sass/fffw-interactive.full.scss */
@@ -50,7 +50,7 @@
 .fffW-widget .fffw-button-reload {
   position: relative;
   float: right;
-  top: -30px;
+  top: -40px;
   background: transparent no-repeat url("../images/widget_reload_FF_gr.png") left 0;
   display: block;
   height: 26px;
