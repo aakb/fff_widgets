@@ -57,9 +57,7 @@ var finurligeFaktaWidget = (function() {
       this.widget = jQ("<div/>", {"class" : "fffW-" + this.params.widget + " fffW-widget"})
                       .append(jQ("<div />", {"class" : "fffW-innerwrapper"})
                                 .append(jQ("<h2 />", {"class" : "fffW-title", "text"  : this.data.title}))
-                                .append(jQ("<p />", {"class" : "fffW-text"})
-                                          .append(this.data.content)
-                                      )
+                                .append(jQ("<p />", {"class" : "fffW-text"}).append(this.data.content))
                             );
 
       // Check if reload button should be attached.
@@ -80,7 +78,7 @@ var finurligeFaktaWidget = (function() {
       }
       
       // Add slogan
-      this.widget.append(jQ('<p />', {
+      jQ('.fffW-innerwrapper', this.widget).append(jQ('<p />', {
         'class' : 'fffW-slogan',
         'text' : 'Viden fra biblioteket'
       }));
@@ -103,9 +101,9 @@ var finurligeFaktaWidget = (function() {
 
         case 'full':
           // Add source link(s).
-          var external = jQ('<div />', {'class' : 'fffw-external-links'});
-          jQ('.fffW-innerwrapper', this.widget).append(external);
+          var external = jQ('<div />', {'class' : 'fffw-external-links'});          
           external.append(this.sourceLinks());
+          jQ('.fffW-slogan', this.widget).before(external);
 
           // Add logo placeholder.
           jQ('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');
@@ -344,7 +342,7 @@ var finurligeFaktaWidget = (function() {
         break;
 
       default:
-        alert('Widget type is not supported');
+        alert('The selected firnulig fakta widget type is not supported');
         break;
     }
   }

@@ -5,14 +5,16 @@
 
 $boxWidth: 370px;
 $innerWidth: 340px;
+$height-from-bottom: 40px;
 
 .fffW-widget-wrapper {
   position: relative;
 }
 
 .fffW-widget {
+  color: $font-color;
   position: absolute;
-  bottom: 25px;
+  bottom: $height-from-bottom;
   overflow: hidden;
   right: 0px;
   width: $boxWidth;
@@ -35,16 +37,22 @@ $innerWidth: 340px;
   }
   .fffW-title {
     font-size: 22px;
-    margin: 18px 0px;
+    margin: 16px 0 0 0;
+  }
+  .fffW-text {
+    margin: 10px 0;
   }
   .fffw-button-reload {
+    position: relative;
+    float: right;
+    top: -40px;
     background: transparent no-repeat $image_reload_url left 0;
     display: block;
-    float: right;
-    height: 30px;
+    height: 26px;
+    width: 32px;
     overflow: hidden;
-    text-indent: -9999px;
-    width: 105px;
+    position: relative;
+    text-indent: -9999px;    
     &:link,
     &:visited,
     &:active {
@@ -52,15 +60,32 @@ $innerWidth: 340px;
       cursor: pointer;
     }
     &:hover {
-      background: transparent no-repeat $image_reload_url -105px 0;
+      background: transparent no-repeat $image_reload_url -32px 0;
       outline: 0;
       cursor: pointer;
     }
   }
   .fffw-external-links {
-    float: left;
     font-size: 12px;
-    padding-top: 7px;
-    width: 230px;
+    padding-top: 7px;    
+  }
+  .fffW-slogan {
+    color: darken($border-color, 20%);
+    font-weight: bolder;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }  
+  a {
+    &:link,
+    &:visited,
+    &:active {
+      color: $font-color;
+    }
+    &:hover {
+      color: darken($font-color, 40%);
+      text-decoration: none;
+    }
   }
 }

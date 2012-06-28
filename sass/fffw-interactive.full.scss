@@ -4,6 +4,7 @@
 @import "typography.scss";
 
 .fffW-widget {
+  color: $font-color;
   background-color: $background-color;
   margin: 10px 0;
   padding: 10px;
@@ -17,7 +18,10 @@
   }
   .fffW-title {
     font-size: 22px;
-    margin: 18px 0px;
+    margin: 16px 0 0 0;
+  }
+  .fffW-text {
+    margin: 10px 0;
   }
   .fffw-button-reload {
     position: relative;
@@ -50,6 +54,18 @@
     font-weight: bolder;
     text-align: center;
     text-transform: uppercase;
+    margin-top: 10px;
     margin-bottom: 0;
+  }
+  a {
+    &:link,
+    &:visited,
+    &:active {
+      color: $font-color;
+    }
+    &:hover {
+      color: darken($font-color, 40%);
+      text-decoration: none;
+    }
   }
 }
