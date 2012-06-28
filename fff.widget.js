@@ -78,6 +78,12 @@ var finurligeFaktaWidget = (function() {
           getGuid(self.params);
         });
       }
+      
+      // Add slogan
+      this.widget.append(jQ('<p />', {
+        'class' : 'fffW-slogan',
+        'text' : 'Viden fra biblioteket'
+      }));
 
       // Make sure that it now shown yet.
       this.widget.hide();
