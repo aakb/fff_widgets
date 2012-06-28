@@ -44,6 +44,7 @@ var finurligeFaktaWidget = (function() {
     this.widget = '';
     this.data = {};
     this.params = {};
+    this.reloaded = false;
 
     this.init = function init(data, params) {
       this.data = data;
@@ -140,6 +141,7 @@ var finurligeFaktaWidget = (function() {
     this.reload = function reload(data) {
       var self = this;
       self.data = data;
+      self.reloaded = true;
       self.hide(function () {
         // Update title and text.
         jQ('.fffW-title', self.widget).text(self.data.title);
@@ -201,10 +203,14 @@ var finurligeFaktaWidget = (function() {
   SlideInWidget.prototype.createTarget = function() {
     var target;
     if (this.params.target.charAt(0) === '#') {
-      target = jQ('<div />', { 'id' : this.params.target.substring(1) });
+      target = jQ('<div />', {
+        'id' : this.params.target.substring(1)
+      });
     }
     else {
-      target = jQ('<div />', { 'class' : this.params.target.substring(1) });
+      target =jQ('<div />', {
+        'class' : this.params.target.substring(1)
+      });
     }
     target.addClass('fffW-widget-wrapper');
     jQ('body').append(target);
@@ -215,24 +221,63 @@ var finurligeFaktaWidget = (function() {
     var self = this;
 
     // If the page is reload when at the buttom slide it in now.
-    if ($(window).height() + $("html").scrollTop() === $(document).height() - 1) {
+    if (jQ(window).height() + jQ("html").scrollTop() === jQ(document).height() - 1) {
       this.slideIn();
     }
 
     // Hook into the scroll event and slide in when bottom reached.
-    $(window).scroll(function() {
-      if ($(window).height() + $("html").scrollTop() === $(document).height() - 1) {
+    jQ(window).scroll(function() {
+      if (jQ(window).height() + jQ("html").scrollTop() === jQ(document).height() - 1) {
         self.slideIn();
       }
     });
   };
 
+  // Override hide method.
+  SlideInWidget.prototype.hide = function(callback) {
+    if (this.reloaded) {
+      this.widget.fadeOut(function () {
+        if (callback) {
+          callback();
+        }
+      });
+    }
+    else {
+      $('.fffW-slidein').animate({
+        width : '0px',
+      }, {
+        complete : function() {
+          $('.fffW-slidein').removeClass('active');
+          if (callback) {
+            callback();
+          }
+        }
+      }, 1000);
+    }
+  };
+
   // Implementation of slide in aninmation.
   SlideInWidget.prototype.slideIn = function() {
-    this.widget.show();
-    $('.fffW-widget-wrapper').width('0px').animate({
-      width : '370px',
-    }, 1000);
+    var self = this;
+    if (self.reloaded) {
+      // The widget have been reloaded so fade not slide.
+      self.widget.fadeIn();
+      self.reloaded = false;
+    }
+    else {
+      var slideIn = $('.fffW-slidein');
+      if (!slideIn.hasClass('active')) {
+        // The widget have not been slide in, so do it.
+        self.widget.show();
+        slideIn.width('0px').animate({
+          width : '370px',
+        }, {
+          complete : function() {
+            slideIn.addClass('active');
+          }
+        }, 1000);
+      }
+    }
   };
 
   // ----- / Create Widgets -----

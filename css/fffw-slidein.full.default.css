@@ -6,42 +6,41 @@
 /* line 9, ../sass/fffw-slidein.full.scss */
 .fffW-widget-wrapper {
   position: relative;
-  float: right;
-  z-index: 1000;
-  width: 0;
-  overflow: visible !important;
 }
 
-/* line 17, ../sass/fffw-slidein.full.scss */
+/* line 13, ../sass/fffw-slidein.full.scss */
 .fffW-widget {
-  background-color: white;
+  position: absolute;
   bottom: 25px;
-  font-size: 14px;
+  overflow: hidden;
+  right: 0px;
+  width: 370px;
+}
+/* line 19, ../sass/fffw-slidein.full.scss */
+.fffW-widget .fffW-innerwrapper {
+  background-color: white;
   border-top: 8px solid #dfdfdf;
   border-left: 1px solid #dfdfdf;
   border-bottom: 8px solid #dfdfdf;
   border-right: 1px solid #dfdfdf;
-  position: absolute;
-}
-/* line 26, ../sass/fffw-slidein.full.scss */
-.fffW-widget .fffW-innerwrapper {
-  overflow: auto;
+  font-size: 14px;
   padding: 10px 10px 10px 16px;
-  width: 344px;
+  overflow: auto;
+  width: 340px;
 }
-/* line 31, ../sass/fffw-slidein.full.scss */
+/* line 30, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffw-logo {
   background: transparent no-repeat url("../images/widget_logo_FF_default.png") 0 0;
   display: block;
   height: 40px;
   width: 85px;
 }
-/* line 37, ../sass/fffw-slidein.full.scss */
+/* line 36, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffW-title {
   font-size: 22px;
   margin: 18px 0px;
 }
-/* line 41, ../sass/fffw-slidein.full.scss */
+/* line 40, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffw-button-reload {
   background: transparent no-repeat url("../images/widget_reload_FF_default.png") left 0;
   display: block;
@@ -51,18 +50,18 @@
   text-indent: -9999px;
   width: 105px;
 }
-/* line 51, ../sass/fffw-slidein.full.scss */
+/* line 50, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffw-button-reload:link, .fffW-widget .fffw-button-reload:visited, .fffW-widget .fffw-button-reload:active {
   outline: 0;
   cursor: pointer;
 }
-/* line 55, ../sass/fffw-slidein.full.scss */
+/* line 54, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffw-button-reload:hover {
   background: transparent no-repeat url("../images/widget_reload_FF_default.png") -105px 0;
   outline: 0;
   cursor: pointer;
 }
-/* line 61, ../sass/fffw-slidein.full.scss */
+/* line 60, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffw-external-links {
   float: left;
   font-size: 12px;

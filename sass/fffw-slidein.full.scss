@@ -4,28 +4,27 @@
 @import "typography.scss";
 
 $boxWidth: 370px;
-$innerWidth: 344px;
+$innerWidth: 340px;
 
 .fffW-widget-wrapper {
   position: relative;
-  float: right;
-  z-index: 1000;
-  width: 0;
-  overflow: visible !important;
 }
 
 .fffW-widget {
-  background-color: $background-color;
-  bottom: 25px;
-  font-size: 14px;  
-  border-top: 8px solid $border-color;
-  border-left: 1px solid $border-color;
-  border-bottom: 8px solid $border-color;
-  border-right: 1px solid $border-color;
   position: absolute;
+  bottom: 25px;
+  overflow: hidden;
+  right: 0px;
+  width: $boxWidth;
   .fffW-innerwrapper {
-    overflow: auto;
+    background-color: $background-color;
+    border-top: 8px solid $border-color;
+    border-left: 1px solid $border-color;
+    border-bottom: 8px solid $border-color;
+    border-right: 1px solid $border-color;
+    font-size: 14px;
     padding: 10px 10px 10px 16px;
+    overflow: auto;
     width: $innerWidth;
   }
   .fffw-logo {
