@@ -3,30 +3,31 @@
   font-family: "helvetica, arial sans-serif";
 }
 
-/* line 10, ../sass/fffw-slidein.full.scss */
-body {
+/* line 9, ../sass/fffw-slidein.full.scss */
+.fffW-widget-wrapper {
   position: relative;
+  float: right;
+  z-index: 1000;
+  width: 0;
+  overflow: visible !important;
 }
 
-/* line 14, ../sass/fffw-slidein.full.scss */
+/* line 17, ../sass/fffw-slidein.full.scss */
 .fffW-widget {
   background-color: white;
-  position: absolute;
   bottom: 25px;
-  right: 0px;
-  padding: 10px 10px 10px 16px;
+  font-size: 14px;
   border-top: 8px solid #dfdfdf;
   border-left: 1px solid #dfdfdf;
-  border-right: 1px solid #dfdfdf;
   border-bottom: 8px solid #dfdfdf;
-  width: 370px;
-  font-size: 14px;
-  z-index: 1000;
-  overflow: hidden;
+  border-right: 1px solid #dfdfdf;
+  position: absolute;
 }
-/* line 28, ../sass/fffw-slidein.full.scss */
+/* line 26, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffW-innerwrapper {
-  width: 344;
+  overflow: auto;
+  padding: 10px 10px 10px 16px;
+  width: 344px;
 }
 /* line 31, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffw-logo {

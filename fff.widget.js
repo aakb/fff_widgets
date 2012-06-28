@@ -53,7 +53,7 @@ var finurligeFaktaWidget = (function() {
     };
 
     this.build = function build() {
-      this.widget = jQ("<div/>", {"class" : "fffW-interactive fffW-widget"})
+      this.widget = jQ("<div/>", {"class" : "fffW-" + this.params.widget + " fffW-widget"})
                       .append(jQ("<div />", {"class" : "fffW-innerwrapper"})
                                 .append(jQ("<h2 />", {"class" : "fffW-title", "text"  : this.data.title}))
                                 .append(jQ("<p />", {"class" : "fffW-text"})
@@ -185,7 +185,9 @@ var finurligeFaktaWidget = (function() {
   // Override hide method.
   InteractiveWidget.prototype.hide = function(callback) {
     this.widget.fadeOut(function () {
-      callback();
+      if (callback) {
+        callback();
+      }
     });
   };
 
@@ -204,6 +206,7 @@ var finurligeFaktaWidget = (function() {
     else {
       target = jQ('<div />', { 'class' : this.params.target.substring(1) });
     }
+    target.addClass('fffW-widget-wrapper');
     jQ('body').append(target);
   };
 
@@ -226,10 +229,10 @@ var finurligeFaktaWidget = (function() {
 
   // Implementation of slide in aninmation.
   SlideInWidget.prototype.slideIn = function() {
-    var self = this;
-    this.widget.fadeIn(function() {
-//      alert(self.widget.outerHeight(true));
-    });
+    this.widget.show();
+    $('.fffW-widget-wrapper').width('0px').animate({
+      width : '370px',
+    }, 1000);
   };
 
   // ----- / Create Widgets -----

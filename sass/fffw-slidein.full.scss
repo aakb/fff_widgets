@@ -4,28 +4,28 @@
 @import "typography.scss";
 
 $boxWidth: 370px;
-$innerWidth: 344;
+$innerWidth: 344px;
 
-// We need the body to be relative to place the slide in widget x px from the buttom
-body {
+.fffW-widget-wrapper {
   position: relative;
+  float: right;
+  z-index: 1000;
+  width: 0;
+  overflow: visible !important;
 }
 
 .fffW-widget {
   background-color: $background-color;
-  position: absolute;
   bottom: 25px;
-  right: 0px;
-  padding: 10px 10px 10px 16px;
+  font-size: 14px;  
   border-top: 8px solid $border-color;
   border-left: 1px solid $border-color;
-  border-right: 1px solid $border-color;
   border-bottom: 8px solid $border-color;
-  width: $boxWidth;
-  font-size: 14px;
-  z-index: 1000;
-  overflow: hidden;
+  border-right: 1px solid $border-color;
+  position: absolute;
   .fffW-innerwrapper {
+    overflow: auto;
+    padding: 10px 10px 10px 16px;
     width: $innerWidth;
   }
   .fffw-logo {
