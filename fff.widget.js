@@ -63,6 +63,7 @@ var finurligeFaktaWidget = (function() {
     // Push track event to Google Analytics.
     _gaq.push(
       ['fff._setAccount', fff.GAProfile],
+      ['fff._setDomainName', document.location.host],
       ['fff._trackPageview'],
       ['fff._trackEvent', 'Finurlig Fakta', eventName, data]
     );
