@@ -57,7 +57,7 @@ var finurligeFaktaWidget = (function() {
         'text' : 'var _gaq = _gaq || [];'
       });
 
-      $('body').append(gat).append(gaq);
+      jQ('body').append(gat).append(gaq);
     }
 
     // Track page view.
@@ -270,14 +270,14 @@ var finurligeFaktaWidget = (function() {
   SlideInWidget.prototype.show = function() {
     var self = this;
 
-    // If the page is reload when at the buttom slide it in now.
-    if (jQ(window).height() + jQ("html").scrollTop() === jQ(document).height() - 1) {
-      this.slideIn();
+    // If at bottom when loaded, slide in the widget.
+    if (jQ(window).scrollTop() == jQ(document).height() - jQ(window).height()) {
+      self.slideIn();
     }
 
-    // Hook into the scroll event and slide in when bottom reached.
-    jQ(window).scroll(function() {
-      if (jQ(window).height() + jQ("html").scrollTop() === jQ(document).height() - 1) {
+    // Slide in if bottom of page is reached.
+    jQ(window).scroll(function(e) {
+      if (jQ(window).scrollTop() == jQ(document).height() - jQ(window).height()) {
         self.slideIn();
       }
     });
