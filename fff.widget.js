@@ -41,7 +41,7 @@ var finurligeFaktaWidget = (function() {
   }
 
   // Enable Google Analytices tracking.
-  function trackEvent(eventName, data) {
+  function trackEvent(events, trackPageview) {
     // Add Google Analytics to the page.
     if (window._gaq === undefined) {
       // Build Google Analytics script tag.
@@ -60,13 +60,23 @@ var finurligeFaktaWidget = (function() {
       $('body').append(gat).append(gaq);
     }
 
-    // Push track event to Google Analytics.
-    _gaq.push(
-      ['fff._setAccount', fff.GAProfile],
-      ['fff._setDomainName', document.location.host],
-      ['fff._trackPageview'],
-      ['fff._trackEvent', 'Finurlig Fakta', eventName, data]
-    );
+    // Track page view.
+    if (trackPageview === true) {
+      _gaq.push(
+        ['fff._setAccount', fff.GAProfile],
+        ['fff._setDomainName', document.location.host],
+        ['fff._trackPageview']
+      );
+    }
+
+    // Push track events to Google Analytics.
+    for (var event in events) {
+      _gaq.push(
+        ['fff._setAccount', fff.GAProfile],
+        ['fff._setDomainName', document.location.host],
+        ['fff._trackEvent', 'Finurlig Fakta', event, events[event]]
+      );
+    }
   }
 
   // ----- / Define widget object -----
@@ -100,7 +110,9 @@ var finurligeFaktaWidget = (function() {
           event.preventDefault();
 
           if (self.params.tracking) {
-            trackEvent('Reload clicked', document.location.host);
+            trackEvent({
+             'Reloaded' : document.location.host
+            });
           }
 
           // Reset params and save ref. to this widget.
@@ -126,14 +138,10 @@ var finurligeFaktaWidget = (function() {
     this.style = function style() {
       switch (this.params.style.type) {
         case 'minimal':
-
+          // Should be empty as build has done the work.
           break;
 
         case 'normal':
-          alert('This style normal have not been implemented yet, please use full widgets.');
-          break;
-
-        case 'full':
           // Add source link(s).
           var external = jQ('<div />', {'class' : 'fffw-external-links'});
           external.append(this.sourceLinks());
@@ -147,6 +155,10 @@ var finurligeFaktaWidget = (function() {
           var css = fff.widgetDomain + 'css/fffw-' + this.params.widget + '.full.' + this.params.style.color + '.css';
           jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
 
+          break;
+
+        case 'full':
+          alert('This style full have not been implemented yet, please use full widgets.');
           break;
       }
     };
@@ -408,10 +420,12 @@ var finurligeFaktaWidget = (function() {
 
       // Enable event tracking (Google Analytices).
       if (params.tracking) {
-        trackEvent('Loaded', document.location.host);
-        trackEvent('Widget type', params.widget);
-        trackEvent('Widget style', params.style.type);
-        trackEvent('Widget color', params.style.color);
+        trackEvent({
+          'Loaded at' : document.location.host,
+          'Widget type' : params.widget,
+          'Widget style' : params.style.type,
+          'Widget color' : params.style.color
+        }, true);
       }
 
       // Activate the widget.
