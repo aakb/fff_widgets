@@ -44,8 +44,6 @@ var finurligeFaktaWidget = (function() {
   function trackEvent(eventName, data) {
     // Add Google Analytics to the page.
     if (window._gaq === undefined) {
-      alert('insert');
-
       // Build Google Analytics script tag.
       var gat = jQ('<script />', {
         'type' : 'text/javascript',
