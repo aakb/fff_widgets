@@ -42,21 +42,31 @@ var finurligeFaktaWidget = (function() {
 
   // Enable Google Analytices tracking.
   function trackEvent(eventName, data) {
-    var _gaq = _gaq || [];
+    // Add Google Analytics to the page.
+    if (window._gaq === undefined) {
+      alert('insert');
+
+      // Build Google Analytics script tag.
+      var gat = jQ('<script />', {
+        'type' : 'text/javascript',
+        'async' : true,
+        'src' : ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'
+      });
+
+      // Add global tracking array.
+      var gaq = jQ('<script />', {
+        'type' : 'text/javascript',
+        'text' : 'var _gaq = _gaq || [];'
+      });
+
+      $('body').append(gat).append(gaq);
+    }
+
+    // Push track event to Google Analytics.
     _gaq.push(
       ['fff._setAccount', fff.GAProfile],
-      ['fff._trackPageview'],
       ['fff._trackEvent', 'Finurlig Fakta', eventName, data]
     );
-
-    // Add Google Analytics to the page.
-    if (!(window.gat_ && window.gat_.getTracker_)) {
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    }
   }
 
   // ----- / Define widget object -----
