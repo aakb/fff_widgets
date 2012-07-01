@@ -406,7 +406,10 @@ var finurligeFaktaWidget = (function() {
 
       // Enable event tracking (Google Analytices).
       if (params.tracking) {
-        trackEvent('Request widget', document.location.host);
+        trackEvent('Loaded', document.location.host);
+        trackEvent('Widget type', params.widget);
+        trackEvent('Widget style', params.style.type);
+        trackEvent('Widget color', params.style.color);
       }
 
       // Activate the widget.
