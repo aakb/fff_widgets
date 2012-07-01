@@ -5,7 +5,8 @@ var finurligeFaktaWidget = (function() {
   var fff = {
     'domain' : "//service.finurligefakta.dk/",
     'widgetDomain' : '//service.finurligefakta.dk/widgets/',
-    'baseGuid' : null
+    'baseGuid' : null,
+    'GAProfile' : 'UA-33040623-1'
   };
 
   // Defaul conifguration options.
@@ -39,6 +40,25 @@ var finurligeFaktaWidget = (function() {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
   }
 
+  // Enable Google Analytices tracking.
+  function trackEvent(eventName, data) {
+    var _gaq = _gaq || [];
+    _gaq.push(
+      ['fff._setAccount', fff.GAProfile],
+      ['fff._trackPageview'],
+      ['fff._trackEvent', 'Finurlig Fakta', eventName, data]
+    );
+
+    // Add Google Analytics to the page.
+    if (!(window.gat_ && window.gat_.getTracker_)) {
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    }
+  }
+
   // ----- / Define widget object -----
   function Widget() {
     this.widget = '';
@@ -69,6 +89,10 @@ var finurligeFaktaWidget = (function() {
           event.stopPropagation();
           event.preventDefault();
 
+          if (self.params.tracking) {
+            trackEvent('Reload clicked', document.location.host);
+          }
+
           // Reset params and save ref. to this widget.
           self.params.guid = null;
           self.params.callback = 'finurligeFaktaWidget.reload';
@@ -76,7 +100,7 @@ var finurligeFaktaWidget = (function() {
           getGuid(self.params);
         });
       }
-      
+
       // Add slogan
       jQ('.fffW-innerwrapper', this.widget).append(jQ('<p />', {
         'class' : 'fffW-slogan',
@@ -101,7 +125,7 @@ var finurligeFaktaWidget = (function() {
 
         case 'full':
           // Add source link(s).
-          var external = jQ('<div />', {'class' : 'fffw-external-links'});          
+          var external = jQ('<div />', {'class' : 'fffw-external-links'});
           external.append(this.sourceLinks());
           jQ('.fffW-slogan', this.widget).before(external);
 
@@ -248,7 +272,7 @@ var finurligeFaktaWidget = (function() {
     }
     else {
       jQ('.fffW-slidein').animate({
-        width : '0px',
+        width : '0px'
       }, {
         complete : function() {
           jQ('.fffW-slidein').removeClass('active');
@@ -274,7 +298,7 @@ var finurligeFaktaWidget = (function() {
         // The widget have not been slide in, so do it.
         self.widget.show();
         slideIn.width('0px').animate({
-          width : '370px',
+          width : '370px'
         }, {
           complete : function() {
             slideIn.addClass('active');
@@ -372,6 +396,11 @@ var finurligeFaktaWidget = (function() {
         params.style.type = 'default';
       }
 
+      // Enable event tracking (Google Analytices).
+      if (params.tracking) {
+        trackEvent('Request widget', document.location.host);
+      }
+
       // Activate the widget.
       getGuid(params);
     });
@@ -380,7 +409,7 @@ var finurligeFaktaWidget = (function() {
   return {
     init: initializeFramework,
     load: loadFact,
-    reload: reloadWidget,
+    reload: reloadWidget
   };
 
 }());
