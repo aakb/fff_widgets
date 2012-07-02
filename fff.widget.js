@@ -138,14 +138,12 @@ var finurligeFaktaWidget = (function() {
     this.style = function style() {
       switch (this.params.style.type) {
         case 'none':
-        
           // Should be empty as build has done the work.
           break;
           
         case 'minimal':
           // Add CSS.
-          var css = fff.widgetDomain + 'css/fffw-' + this.params.widget + '.minimal.' + this.params.style.color + '.css';
-          jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
+          this.addCSS(this.params.widget, 'minimal', this.params.style.color);
           
           // Add logo placeholder.
           jQ('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');          
@@ -153,35 +151,75 @@ var finurligeFaktaWidget = (function() {
 
         case 'normal':
           // Add source link(s).
-          var external = jQ('<div />', {'class' : 'fffw-external-links'});
-          external.append(this.sourceLinks());
-          jQ('.fffW-slogan', this.widget).before(external);
+          jQ('.fffW-slogan', this.widget).before(this.getSourceLinks());
 
           // Add logo placeholder.
           jQ('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');
 
           // Add CSS.
-          var css = fff.widgetDomain + 'css/fffw-' + this.params.widget + '.normal.' + this.params.style.color + '.css';
-          jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
+          this.addCSS(this.params.widget, 'normal', this.params.style.color);
           break;
 
         case 'full':
-          alert('This style full have not been implemented yet, please use full widgets.');
+          // Add source link(s).
+          jQ('.fffW-slogan', this.widget).before(this.getSourceLinks());
+
+          // Add author.
+          jQ('.fffW-slogan', this.widget).before(this.getAuthor());
+          
+          // Add organization.
+          jQ('.fffW-slogan', this.widget).before(this.getOrganization());
+
+          // Add logo placeholder.
+          jQ('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');
+
+          // Add CSS.
+          this.addCSS(this.params.widget, 'full', this.params.style.color);
           break;
       }
     };
 
-    this.sourceLinks = function sourceLinks() {
-      var sources = jQ("<span />", {'class' : 'fffW-link fffW-source', 'text' : 'Læs mere: '});
+    this.addCSS = function addCSS(type, style, color) {
+      // Add CSS.
+      var css = fff.widgetDomain + 'css/fffw-' + type + '.' + style + '.' + color + '.css';
+      jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
+    }
+
+    this.getSourceLinks = function getSourceLinks() {
+      var sources = jQ('<div />', {
+        'class' : 'fffW-external-links fffW-extra'
+      }).append(jQ("<span />", {
+        'class' : 'fffW-label', 
+        'text' : 'Læs mere:'
+      }));
       for (var i in this.data.sources) {
-        sources.append(jQ("<a />", {'class' : 'fffw-link fffw-source',
+        sources.append(jQ("<a />", {'class' : 'fffw-link',
                                       'rel' : 'external',
                                       'href' : this.data.sources[i].url,
                                       'text' : this.data.sources[i].title}));
       }
+      
       return sources;
     };
-
+    
+    this.getAuthor = function getAuthor() {
+      return jQ('<div />', {
+        'class' : 'fffW-author fffW-extra'
+      }).append(jQ('<span />', { 
+        'text' : 'Forfatter:',
+        'class' : 'fffW-label'
+      })).append(this.data.author)
+    }
+    
+    this.getOrganization = function getOrganization() {
+      return jQ('<div />', {
+        'class' : 'fffW-orgnization fffW-extra'
+      }).append(jQ('<span />', { 
+        'text' : 'Organisation:',
+        'class' : 'fffW-label'
+      })).append(this.data.organization)
+    }
+    
     // Insert the widget and fire loadComplet event.
     this.insert = function insert() {
       jQ(this.params.target).html(this.widget);
@@ -205,9 +243,15 @@ var finurligeFaktaWidget = (function() {
         jQ('.fffW-title', self.widget).text(self.data.title);
         jQ('.fffW-text', self.widget).html(self.data.content);
 
-        // Update source links.
-        jQ('.fffw-external-links', self.widget).html(self.sourceLinks());
-
+        // Update source links etc.
+        switch (self.params.style.type) {
+          case 'normal':
+          case 'full':
+            jQ('.fffW-external-links', self.widget).html(self.getSourceLinks());
+            jQ('.fffW-author', self.widget).html(self.getAuthor());
+            jQ('.fffW-orgnization', self.widget).html(self.getOrganization());
+            break;
+        }
         self.show();
       });
     };
