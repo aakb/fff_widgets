@@ -137,8 +137,18 @@ var finurligeFaktaWidget = (function() {
     // style.
     this.style = function style() {
       switch (this.params.style.type) {
-        case 'minimal':
+        case 'none':
+        
           // Should be empty as build has done the work.
+          break;
+          
+        case 'minimal':
+          // Add CSS.
+          var css = fff.widgetDomain + 'css/fffw-' + this.params.widget + '.minimal.' + this.params.style.color + '.css';
+          jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
+          
+          // Add logo placeholder.
+          jQ('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');          
           break;
 
         case 'normal':
@@ -150,11 +160,9 @@ var finurligeFaktaWidget = (function() {
           // Add logo placeholder.
           jQ('.fffW-innerwrapper', this.widget).prepend('<span class="fffw-logo"></span>');
 
-          // Add CSS @todo make this more dynamic and load based on style and
-          // color.
-          var css = fff.widgetDomain + 'css/fffw-' + this.params.widget + '.full.' + this.params.style.color + '.css';
+          // Add CSS.
+          var css = fff.widgetDomain + 'css/fffw-' + this.params.widget + '.normal.' + this.params.style.color + '.css';
           jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
-
           break;
 
         case 'full':
