@@ -190,7 +190,7 @@ var finurligeFaktaWidget = (function() {
       // Add CSS.
       var css = fff.widgetDomain + 'css/fffw-' + type + '.' + style + '.' + color + '.css';
       jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
-    }
+    };
 
     this.getSourceLinks = function getSourceLinks() {
       var sources = jQ('<div />', {
@@ -215,8 +215,8 @@ var finurligeFaktaWidget = (function() {
       }).append(jQ('<span />', {
         'text' : 'Forfatter:',
         'class' : 'fffW-label'
-      })).append(this.data.author)
-    }
+      })).append(this.data.author);
+    };
 
     this.getOrganization = function getOrganization() {
       return jQ('<div />', {
@@ -224,8 +224,8 @@ var finurligeFaktaWidget = (function() {
       }).append(jQ('<span />', {
         'text' : 'Organisation:',
         'class' : 'fffW-label'
-      })).append(this.data.organization)
-    }
+      })).append(this.data.organization);
+    };
 
     // Insert the widget and fire loadComplet event.
     this.insert = function insert() {
@@ -330,14 +330,14 @@ var finurligeFaktaWidget = (function() {
   SlideInWidget.prototype.show = function() {
     var self = this;
 
-    // If at bottom when loaded, slide in the widget.
-    if (jQ(window).scrollTop() == jQ(document).height() - jQ(window).height()) {
+    // If at bottom when loaded, slide in the widget (with 10px buffer).
+    if (jQ(window).scrollTop() >= jQ(document).height() - (jQ(window).height() + 10)) {
       self.slideIn();
     }
 
     // Slide in if bottom of page is reached.
-    jQ(window).scroll(function(e) {
-      if (jQ(window).scrollTop() == jQ(document).height() - jQ(window).height()) {
+    jQ(window).scroll(function() {
+      if (jQ(window).scrollTop() >= jQ(document).height() - (jQ(window).height() + 10)) {
         self.slideIn();
       }
     });
