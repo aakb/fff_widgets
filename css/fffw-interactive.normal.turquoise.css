@@ -77,10 +77,15 @@
   cursor: pointer;
 }
 /* line 49, ../sass/fffw-interactive.normal.scss */
+.fffW-widget .fffW-label {
+  font-weight: bold;
+  padding-right: .2em;
+}
+/* line 53, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffW-external-links {
   font-size: 12px;
 }
-/* line 52, ../sass/fffw-interactive.normal.scss */
+/* line 56, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffW-slogan {
   color: #acacac;
   font-weight: bolder;
@@ -89,11 +94,11 @@
   margin-top: 10px;
   margin-bottom: 0;
 }
-/* line 63, ../sass/fffw-interactive.normal.scss */
+/* line 67, ../sass/fffw-interactive.normal.scss */
 .fffW-widget a:link, .fffW-widget a:visited, .fffW-widget a:active {
   color: #444444;
 }
-/* line 66, ../sass/fffw-interactive.normal.scss */
+/* line 70, ../sass/fffw-interactive.normal.scss */
 .fffW-widget a:hover {
   color: black;
   text-decoration: none;
