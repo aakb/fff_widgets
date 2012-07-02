@@ -6,7 +6,7 @@ var finurligeFaktaWidget = (function() {
     'domain' : "//service.finurligefakta.dk/",
     'widgetDomain' : '//service.finurligefakta.dk/widgets/',
     'baseGuid' : null,
-    'GAProfile' : 'UA-33040623-1'
+    'GAProfile' : 'UA-33089188-1'
   };
 
   // Defaul conifguration options.
