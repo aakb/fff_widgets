@@ -15,7 +15,7 @@ var finurligeFaktaWidget = (function() {
     'widget' : 'interactive',
     'target' : '#fffwidget',
     'style' : {
-      'type' : 'default',
+      'type' : 'normal', // @todo: if style not given, fff homepage only build default is returned.
       'color' : 'default'
     },
     'tracking' : true,
@@ -475,7 +475,7 @@ var finurligeFaktaWidget = (function() {
         params.style.color = 'default';
       }
       if (!params.style.type) {
-        params.style.type = 'default';
+        params.style.type = 'minimal';
       }
 
       // Enable event tracking (Google Analytices).
