@@ -1,0 +1,87 @@
+@import "compass/css3";
+@import "compass/utilities";
+@import "variables.scss";
+@import "typography.scss";
+
+$boxWidth: 370px;
+$innerWidth: 340px;
+$height-from-bottom: 40px;
+
+.fffW-widget-wrapper {
+  position: relative;
+}
+
+.fffW-widget {
+  color: $font-color;
+  position: absolute;
+  bottom: $height-from-bottom;
+  overflow: hidden;
+  right: 0px;
+  width: $boxWidth;
+  .fffW-innerwrapper {
+    background-color: $background-color;
+    border-top: 8px solid $border-color;
+    border-left: 1px solid $border-color;
+    border-bottom: 8px solid $border-color;
+    border-right: 1px solid $border-color;
+    font-size: 14px;
+    padding: 10px 10px 10px 16px;
+    overflow: auto;
+    width: $innerWidth;
+  }
+  .fffw-logo {
+    background: transparent no-repeat $image_logo_url 0 0;
+    display: block;
+    height: 40px;
+    width: 85px;
+  }
+  .fffW-title {
+    font-size: 22px;
+    margin: 16px 0 0 0;
+  }
+  .fffW-text {
+    margin: 10px 0;
+  }
+  .fffw-button-reload {
+    position: relative;
+    float: right;
+    top: -40px;
+    background: transparent no-repeat $image_reload_url left 0;
+    display: block;
+    height: 26px;
+    width: 32px;
+    overflow: hidden;
+    position: relative;
+    text-indent: -9999px;    
+    &:link,
+    &:visited,
+    &:active {
+      outline: 0;
+      cursor: pointer;
+    }
+    &:hover {
+      background: transparent no-repeat $image_reload_url -32px 0;
+      outline: 0;
+      cursor: pointer;
+    }
+  }
+  .fffW-slogan {
+    color: darken($border-color, 20%);
+    font-weight: bolder;
+    text-align: center;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 0;
+  }  
+  a {
+    &:link,
+    &:visited,
+    &:active {
+      color: $font-color;
+    }
+    &:hover {
+      color: darken($font-color, 40%);
+      text-decoration: none;
+    }
+  }
+}
