@@ -189,7 +189,12 @@ var finurligeFaktaWidget = (function() {
     this.addCSS = function addCSS(type, style, color) {
       // Add CSS.
       var css = fff.widgetDomain + 'css/fffw-' + type + '.' + style + '.' + color + '.css';
-      jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
+      if (document.createStyleSheet){
+        document.createStyleSheet(css);
+      }
+      else {
+        jQ('head').append('<link media="all" rel="stylesheet" href="' + css + '" type="text/css" />');
+      }
     };
 
     this.getSourceLinks = function getSourceLinks() {
