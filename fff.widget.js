@@ -234,7 +234,14 @@ var finurligeFaktaWidget = (function() {
 
     // Insert the widget and fire loadComplet event.
     this.insert = function insert() {
-      jQ(this.params.target).html(this.widget);
+      var target = jQ(this.params.target);
+      if (target.length != 1) {
+        // Target was not found on the page.
+        alert('The target div was not found on the page. Please add it to the page and try again.');
+        return -1;
+      }
+
+      target.html(this.widget);
 
       // Fire loadComplet event.
       if (this.params.event.loadComplet !== null) {
