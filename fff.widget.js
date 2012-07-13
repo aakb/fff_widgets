@@ -52,11 +52,7 @@ var finurligeFaktaWidget = (function() {
       });
 
       // Add global tracking array.
-      var gaq = jQ('<script />', {
-        'type' : 'text/javascript',
-        'text' : 'var _gaq = _gaq || [];'
-      });
-
+      var gaq = jQ('<script type="text/javascript">var _gaq = _gaq || [];</script>');
       jQ('body').append(gat).append(gaq);
     }
 
