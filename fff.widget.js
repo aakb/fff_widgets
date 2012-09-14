@@ -515,42 +515,31 @@ var finurligeFaktaWidget = (function() {
  **                                **
  ************************************/
 (function() {
-   "use strict";
+  "use strict";
 
   // Don't let the script run forever.
   var attempts = 30;
 
-  var addLibs = function() {
-    // Try to insert jQuery into the header.
-    var head = document.getElementsByTagName("head");
-    if (head.length === 0) {
-      if (attempts-- > 0) {
-        setTimeout(addLibs, 100);
-      }
-      return;
+  var load_jQuery = function(url, callback) {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+
+    if (script.readyState) { //IE
+      script.onreadystatechange = function () {
+        if (script.readyState == "loaded" || script.readyState == "complete") {
+          script.onreadystatechange = null;
+          callback();
+        }
+      };
+    } else { //Others
+      script.onload = function () {
+        callback();
+      };
     }
 
-    // Insert jQuery into the page header.
-    var node = document.createElement("script");
-    node.src = "//ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js";
-    head[0].appendChild(node);
-    checkLibs();
-  };
-
-  var checkLibs = function() {
-    if (typeof(jQuery) === "undefined" || parseFloat(jQuery.fn.jquery) < 1.4) {
-      // Library isn't done loading
-      if (attempts-- > 0) {
-        setTimeout(checkLibs, 100);
-      }
-      return;
-    }
-    var jQ = jQuery.noConflict(true);
-    // Start the widget parsing in jQuery 1.4.0.
-    jQ(document).ready(function() {
-      finurligeFaktaWidget.init(jQ);
-    });
-  };
+    script.src = url;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  }
 
   // Load jQuery 1.4.0 as thats the first known version to support jsonp as we
   // uses it in the widgets to load facts. But only if an newer version is not
@@ -561,6 +550,12 @@ var finurligeFaktaWidget = (function() {
     });
   }
   else {
-    addLibs();
+    load_jQuery("https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js", function () {
+      var jQ = jQuery.noConflict(true);
+      // Start the widget parsing in jQuery 1.4.0.
+      jQ(document).ready(function() {
+        finurligeFaktaWidget.init(jQ);
+      });
+    });
   }
 })();
