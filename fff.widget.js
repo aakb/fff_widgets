@@ -20,7 +20,8 @@ var finurligeFaktaWidget = (function() {
     },
     'tracking' : true,
     'button' : {
-      'reload' : true
+      'reload' : true,
+      'create' : true
     },
     'event' : {
       'loadComplet' : null
@@ -105,6 +106,7 @@ var finurligeFaktaWidget = (function() {
           event.stopPropagation();
           event.preventDefault();
 
+          // Should the event be send to GA.
           if (self.params.tracking) {
             trackEvent({
              'Reloaded' : document.location.host
@@ -116,6 +118,38 @@ var finurligeFaktaWidget = (function() {
           self.params.callback = 'finurligeFaktaWidget.reload';
           jQ(self.params.target).data('widget', self);
           getGuid(self.params);
+        });
+      }
+
+      if (this.params.button.create) {
+        var create = jQ('<a class="fffw-button fffw-button-create" href="#">Opret nyt faktum</a>');
+        jQ('.fffW-innerwrapper', this.widget).prepend(create);
+        create.click(function(event) {
+          event.stopPropagation();
+          event.preventDefault();
+
+          // Should the event be send to GA.
+          if (self.params.tracking) {
+            trackEvent({
+             'Reloaded' : document.location.host
+            });
+          }
+
+          // TODO: Take action.
+          var dialog_id = '#fff-create-fact-dialog';
+          var options = {
+            modal: true,
+            width: 'auto',
+            height: 'auto',
+            draggable: false,
+            resizable: true
+          }
+
+          // Insert dialog and display it.
+          var popup = $('<div id="' + dialog_id + '" title="Opret ny fakta"><iframe class="dialogIFrame" width="510px" height="355" frameborder="0" marginheight="0" marginwidth="0"></iframe></div>').dialog(options);
+
+          // Load the page into the dialog and then create the dialog only after the page is loaded.
+          popup.children('iframe').attr('src', 'http://fff.leela/ajax/create/fact');
         });
       }
 
@@ -517,14 +551,12 @@ var finurligeFaktaWidget = (function() {
 (function() {
   "use strict";
 
-  // Don't let the script run forever.
-  var attempts = 30;
-
-  var load_jQuery = function(url, callback) {
+  // Helper function to load jQuery.
+  var load_javascript = function(url, callback) {
     var script = document.createElement("script");
     script.type = "text/javascript";
 
-    if (script.readyState) { //IE
+    if (script.readyState) { //IE fix
       script.onreadystatechange = function () {
         if (script.readyState == "loaded" || script.readyState == "complete") {
           script.onreadystatechange = null;
@@ -550,7 +582,7 @@ var finurligeFaktaWidget = (function() {
     });
   }
   else {
-    load_jQuery("https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js", function () {
+    load_javascript("https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js", function () {
       var jQ = jQuery.noConflict(true);
       // Start the widget parsing in jQuery 1.4.0.
       jQ(document).ready(function() {
