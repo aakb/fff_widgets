@@ -135,18 +135,14 @@ var finurligeFaktaWidget = (function() {
             });
           }
 
-          // TODO: Take action.
-          var dialog_id = '#fff-create-fact-dialog';
-          var options = {
-            modal: true,
-            width: 'auto',
-            height: 'auto',
-            draggable: false,
-            resizable: true
-          }
+          // Popup id.
+          var dialog_id = 'fffw-create-fact-dialog';
 
           // Insert dialog and display it.
-          var popup = $('<div id="' + dialog_id + '" title="Opret ny fakta"><iframe class="dialogIFrame" width="510px" height="355" frameborder="0" marginheight="0" marginwidth="0"></iframe></div>').dialog(options);
+          jQ('body').append('<div class="fffw-create-fact-overlay"></div>')
+          var popup = jQ('<div class="' + dialog_id + '" title="Opret ny fakta"><span class="fffw-logo"></span><iframe class="dialogIFrame" width="390px" height="415" frameborder="0" marginheight="0" marginwidth="0"></iframe></div>');
+          jQ('body').append(popup);
+
 
           // Load the page into the dialog and then create the dialog only after the page is loaded.
           popup.children('iframe').attr('src', 'http://fff.leela/ajax/create/fact');
@@ -563,7 +559,8 @@ var finurligeFaktaWidget = (function() {
           callback();
         }
       };
-    } else { //Others
+    }
+    else { //Others
       script.onload = function () {
         callback();
       };

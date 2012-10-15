@@ -1,0 +1,8 @@
+// RGBa background (https://gist.github.com/1949202)
+@mixin rgba-background($color, $alpha) {  
+  $rgba: rgba($color, $alpha);
+  $ie-hex-str: ie-hex-str($rgba);  
+  background-color: $rgba;
+  zoom: 1;
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#{$ie-hex-str},endColorstr=#{$ie-hex-str});
+}
