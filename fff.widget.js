@@ -131,21 +131,22 @@ var finurligeFaktaWidget = (function() {
           // Should the event be send to GA.
           if (self.params.tracking) {
             trackEvent({
-             'Reloaded' : document.location.host
+             'New fact' : document.location.host
             });
           }
 
-          // Popup id.
-          var dialog_id = 'fffw-create-fact-dialog';
+          // Build the dialog window.
+          var popup = jQ('<div/>', { 'class' : 'fffw-dialog' })
+                       .append(jQ('<div/>', { 'class' : 'fffw-header' }))
+                       .append(jQ('<span/>', { 'class' : 'fffw-logo' }))
+                       .append(jQ('<iframe/>', { 'class' : 'fffw-dialog-iframe' }));
 
-          // Insert dialog and display it.
-          jQ('body').append('<div class="fffw-create-fact-overlay"></div>')
-          var popup = jQ('<div class="' + dialog_id + '" title="Opret ny fakta"><span class="fffw-logo"></span><iframe class="dialogIFrame" width="390px" height="415" frameborder="0" marginheight="0" marginwidth="0"></iframe></div>');
+          // Add overlay and insert the dialog.
+          jQ('body').append(jQ('<div/>', { 'class' : 'fffw-overlay' }));
           jQ('body').append(popup);
 
-
-          // Load the page into the dialog and then create the dialog only after the page is loaded.
-          popup.children('iframe').attr('src', 'http://fff.leela/ajax/create/fact');
+          // Load the form into the iframe from the homepage.
+          $('iframe', popup).attr('src', 'http://fff.leela/ajax/create/fact');
         });
       }
 
@@ -568,7 +569,7 @@ var finurligeFaktaWidget = (function() {
 
     script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script);
-  }
+  };
 
   // Load jQuery 1.4.0 as thats the first known version to support jsonp as we
   // uses it in the widgets to load facts. But only if an newer version is not
