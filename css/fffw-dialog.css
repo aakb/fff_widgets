@@ -1,9 +1,9 @@
 /*
 Syntax error: Undefined variable: "$image_close_url".
-        on line 50 of /Users/cableman/source/work/other/fff/fff_widgets/sass/fffw-dialog.scss
+        on line 52 of /Users/cableman/source/work/other/fff/fff_widgets/sass/fffw-dialog.scss
 
 Backtrace:
-/Users/cableman/source/work/other/fff/fff_widgets/sass/fffw-dialog.scss:50
+/Users/cableman/source/work/other/fff/fff_widgets/sass/fffw-dialog.scss:52
 /Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/script/variable.rb:49:in `_perform'
 /Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/script/node.rb:40:in `perform'
 /Applications/CodeKit.app/Contents/Resources/engines/compass/bin/../../scss/lib/sass/../sass/script/list.rb:70:in `_perform'
@@ -86,4 +86,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined variable: \"$image_close_url\".\A         on line 50 of /Users/cableman/source/work/other/fff/fff_widgets/sass/fffw-dialog.scss"; }
+  content: "Syntax error: Undefined variable: \"$image_close_url\".\A         on line 52 of /Users/cableman/source/work/other/fff/fff_widgets/sass/fffw-dialog.scss"; }

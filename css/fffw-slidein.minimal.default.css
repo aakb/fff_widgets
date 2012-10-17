@@ -74,13 +74,17 @@
 .fffw-dialog {
   background-color: #FFF;
   border: 8px solid #dfdfdf;
-  position: absolute;
-  top: 0;
-  left: 25%;
+  position: fixed;
+  top: 50%;
+  margin-top: -227px;
+  /* negative half of height */
+  left: 50%;
+  margin-left: -205px;
+  /* negative half of width */
   width: 410px;
   z-index: 1000;
 }
-/* line 23, ../sass/fffw-dialog.scss */
+/* line 25, ../sass/fffw-dialog.scss */
 .fffw-dialog .fffw-header {
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;
@@ -98,7 +102,7 @@
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   vertical-align: middle;
 }
-/* line 41, ../sass/fffw-dialog.scss */
+/* line 43, ../sass/fffw-dialog.scss */
 .fffw-dialog .fffw-close {
   background: transparent url("../images/close.png") no-repeat;
   position: absolute;
@@ -108,11 +112,11 @@
   width: 24px;
   text-indent: -9999px;
 }
-/* line 49, ../sass/fffw-dialog.scss */
+/* line 51, ../sass/fffw-dialog.scss */
 .fffw-dialog .fffw-close:hover {
   background: transparent url("../images/close_default.png") no-repeat;
 }
-/* line 54, ../sass/fffw-dialog.scss */
+/* line 56, ../sass/fffw-dialog.scss */
 .fffw-dialog .fffw-dialog-iframe {
   border: none;
   height: 400px;

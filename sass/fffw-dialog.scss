@@ -14,9 +14,11 @@
 .fffw-dialog {
   background-color: #FFF;
   border: 8px solid $border-color;
-  position: absolute;
-  top: 0;
-  left: 25%;
+  position: fixed;
+  top: 50%;
+  margin-top: -227px; /* negative half of height */
+  left: 50%;
+  margin-left: -205px; /* negative half of width */
   width: 410px;
   z-index: 1000;
 

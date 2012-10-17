@@ -137,7 +137,7 @@ var finurligeFaktaWidget = (function() {
 
           // Build the dialog window.
           var popup = jQ('<div/>', { 'class' : 'fffw-dialog' })
-                       .append(jQ('<h3/>', { 'class' : 'fffw-header' }).html('Indsend ny fakta'))
+                       .append(jQ('<h3/>', { 'class' : 'fffw-header' }).html('Ind send nyt faktum'))
                        .append(jQ('<a/>', { 'class' : 'fffw-close', 'href' : '#' }).html('Close'))
                        .append(jQ('<iframe/>', { 'class' : 'fffw-dialog-iframe' }));
 
