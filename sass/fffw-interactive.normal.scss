@@ -2,6 +2,7 @@
 @import "compass/utilities";
 @import "variables.scss";
 @import "typography.scss";
+@import "fffw-dialog.scss";
 
 .fffW-widget {
   color: $font-color;
@@ -10,7 +11,7 @@
   padding: 10px;
   border: 8px solid $border-color;
   font-size: 14px;
-  .fffw-logo {    
+  .fffw-logo {
     background: transparent no-repeat $image_logo_url 0 0;
     display: block;
     height: 40px;

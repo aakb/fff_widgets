@@ -137,8 +137,8 @@ var finurligeFaktaWidget = (function() {
 
           // Build the dialog window.
           var popup = jQ('<div/>', { 'class' : 'fffw-dialog' })
-                       .append(jQ('<div/>', { 'class' : 'fffw-header' }))
-                       .append(jQ('<span/>', { 'class' : 'fffw-logo' }))
+                       .append(jQ('<h3/>', { 'class' : 'fffw-header' }).html('Indsend ny fakta'))
+                       .append(jQ('<a/>', { 'class' : 'fffw-close', 'href' : '#' }).html('Close'))
                        .append(jQ('<iframe/>', { 'class' : 'fffw-dialog-iframe' }));
 
           // Add overlay and insert the dialog.
@@ -146,7 +146,12 @@ var finurligeFaktaWidget = (function() {
           jQ('body').append(popup);
 
           // Load the form into the iframe from the homepage.
-          $('iframe', popup).attr('src', 'http://fff.leela/ajax/create/fact');
+          jQ('iframe', popup).attr('src', 'http://fff.leela/ajax/create/fact');
+
+          jQ('.fffw-close', popup).click(function() {
+            popup.remove();
+            jQ('.fffw-overlay').remove();
+          });
         });
       }
 

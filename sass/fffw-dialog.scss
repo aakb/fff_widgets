@@ -17,21 +17,44 @@
   position: absolute;
   top: 0;
   left: 25%;
-  width: 390px;
+  width: 410px;
   z-index: 1000;
-  padding: 10px;
+
+  .fffw-header {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F5F5F5;
+    background-image: -moz-linear-gradient(center top , #FFFFFF, #E6E6E6);
+    background-repeat: repeat-x;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #333333;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+    padding: 10px 14px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+  }
+
+  .fffw-close {
+    background: transparent url('../images/close.png') no-repeat;
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    height: 24px;
+    width: 24px;
+    text-indent: -9999px;
+    &:hover {
+      background: transparent $image_close_url no-repeat;
+    }
+  }
 
   .fffw-dialog-iframe {
     border: none;
     height: 400px;
-    width: 390px;
-  }
-
-  .fffw-logo {
-    background: transparent no-repeat $image_logo_url 0 0;
-    display: block;
-    padding-top: 10px;
-    height: 40px;
-    width: 85px;
+    width: 400px;
+    margin: 0 0 10px 10px;
   }
 }
