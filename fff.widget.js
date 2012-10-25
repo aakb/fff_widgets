@@ -21,7 +21,7 @@ var finurligeFaktaWidget = (function() {
     'tracking' : true,
     'button' : {
       'reload' : true,
-      'create' : true
+      'create' : false
     },
     'event' : {
       'loadComplet' : null
@@ -151,7 +151,7 @@ var finurligeFaktaWidget = (function() {
           jQ('body').append(popup);
 
           // Load the form into the iframe from the homepage.
-          jQ('iframe', popup).attr('src', 'http://fff.leela/ajax/create/fact');
+          jQ('iframe', popup).attr('src', 'http://finurligefakta.dk/ajax/create/fact');
 
           jQ('.fffw-close', popup).click(function() {
             popup.remove();
