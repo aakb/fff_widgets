@@ -97,6 +97,11 @@ var finurligeFaktaWidget = (function() {
                                 .append(jQ("<p />", {"class" : "fffW-text"}).append(this.data.content))
                             );
 
+      // Add slogan
+      jQ('.fffW-innerwrapper', this.widget).append(jQ('<div />', { 'class' : 'fffW-slogan' })
+                                                    .append(jQ('<p />', { 'class' : 'fffw-slogan-text', 'text' : 'Viden fra biblioteket' }))
+                                                  );
+
       // Check if reload button should be attached.
       if (this.params.button.reload) {
         var self = this;
@@ -122,8 +127,8 @@ var finurligeFaktaWidget = (function() {
       }
 
       if (this.params.button.create) {
-        var create = jQ('<a class="fffw-button fffw-button-create" href="#">Opret nyt faktum</a>');
-        jQ('.fffW-innerwrapper', this.widget).prepend(create);
+        var create = jQ('<a class="fffw-button fffw-button-create" href="#">Tilføj Fakta</a>');
+        jQ('.fffW-slogan', this.widget).prepend(create);
         create.click(function(event) {
           event.stopPropagation();
           event.preventDefault();
@@ -137,7 +142,7 @@ var finurligeFaktaWidget = (function() {
 
           // Build the dialog window.
           var popup = jQ('<div/>', { 'class' : 'fffw-dialog' })
-                       .append(jQ('<h3/>', { 'class' : 'fffw-header' }).html('Ind send nyt faktum'))
+                       .append(jQ('<h3/>', { 'class' : 'fffw-header' }).html('Bidrag med Finurlige Fakta'))
                        .append(jQ('<a/>', { 'class' : 'fffw-close', 'href' : '#' }).html('Close'))
                        .append(jQ('<iframe/>', { 'class' : 'fffw-dialog-iframe' }));
 
@@ -154,12 +159,6 @@ var finurligeFaktaWidget = (function() {
           });
         });
       }
-
-      // Add slogan
-      jQ('.fffW-innerwrapper', this.widget).append(jQ('<p />', {
-        'class' : 'fffW-slogan',
-        'text' : 'Viden fra biblioteket'
-      }));
 
       // Make sure that it now shown yet.
       this.widget.hide();

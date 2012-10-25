@@ -176,8 +176,21 @@
 /* line 50, ../sass/fffw-interactive.minimal.scss */
 .fffW-widget .fffW-slogan {
   color: #acacac;
-  font-weight: bolder;
   text-align: center;
+}
+/* line 54, ../sass/fffw-interactive.minimal.scss */
+.fffW-widget .fffW-slogan .fffw-button-create {
+  margin-top: 10px;
+  display: block;
+  color: #797979;
+}
+/* line 59, ../sass/fffw-interactive.minimal.scss */
+.fffW-widget .fffW-slogan .fffw-button-create:hover {
+  color: black;
+}
+/* line 64, ../sass/fffw-interactive.minimal.scss */
+.fffW-widget .fffW-slogan .fffw-slogan-text {
+  font-weight: bolder;
   text-transform: uppercase;
   margin-top: 10px;
   margin-bottom: 0;

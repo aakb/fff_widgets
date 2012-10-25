@@ -202,17 +202,30 @@
 /* line 76, ../sass/fffw-slidein.full.scss */
 .fffW-widget .fffW-slogan {
   color: #acacac;
-  font-weight: bolder;
   text-align: center;
+}
+/* line 80, ../sass/fffw-slidein.full.scss */
+.fffW-widget .fffW-slogan .fffw-button-create {
+  margin-top: 10px;
+  display: block;
+  color: #797979;
+}
+/* line 85, ../sass/fffw-slidein.full.scss */
+.fffW-widget .fffW-slogan .fffw-button-create:hover {
+  color: black;
+}
+/* line 90, ../sass/fffw-slidein.full.scss */
+.fffW-widget .fffW-slogan .fffw-slogan-text {
+  font-weight: bolder;
   text-transform: uppercase;
   margin-top: 10px;
   margin-bottom: 0;
 }
-/* line 87, ../sass/fffw-slidein.full.scss */
+/* line 100, ../sass/fffw-slidein.full.scss */
 .fffW-widget a:link, .fffW-widget a:visited, .fffW-widget a:active {
   color: #444444;
 }
-/* line 90, ../sass/fffw-slidein.full.scss */
+/* line 103, ../sass/fffw-slidein.full.scss */
 .fffW-widget a:hover {
   color: black;
   text-decoration: none;

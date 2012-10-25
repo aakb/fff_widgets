@@ -193,17 +193,30 @@
 /* line 69, ../sass/fffw-slidein.minimal.scss */
 .fffW-widget .fffW-slogan {
   color: #acacac;
-  font-weight: bolder;
   text-align: center;
+}
+/* line 73, ../sass/fffw-slidein.minimal.scss */
+.fffW-widget .fffW-slogan .fffw-button-create {
+  margin-top: 10px;
+  display: block;
+  color: #797979;
+}
+/* line 78, ../sass/fffw-slidein.minimal.scss */
+.fffW-widget .fffW-slogan .fffw-button-create:hover {
+  color: black;
+}
+/* line 83, ../sass/fffw-slidein.minimal.scss */
+.fffW-widget .fffW-slogan .fffw-slogan-text {
+  font-weight: bolder;
   text-transform: uppercase;
   margin-top: 10px;
   margin-bottom: 0;
 }
-/* line 80, ../sass/fffw-slidein.minimal.scss */
+/* line 93, ../sass/fffw-slidein.minimal.scss */
 .fffW-widget a:link, .fffW-widget a:visited, .fffW-widget a:active {
   color: #444444;
 }
-/* line 83, ../sass/fffw-slidein.minimal.scss */
+/* line 96, ../sass/fffw-slidein.minimal.scss */
 .fffW-widget a:hover {
   color: black;
   text-decoration: none;
