@@ -63,7 +63,7 @@
   background-color: rgba(0, 0, 0, 0.45);
   zoom: 1;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#73000000,endColorstr=#73000000);
-  position: absolute;
+  position: fixed;
   top: 0;
   height: 100%;
   width: 100%;

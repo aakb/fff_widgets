@@ -4,7 +4,7 @@
 
 .fffw-overlay {
   @include rgba-background(#000, .45);
-  position: absolute;
+  position: fixed;
   top: 0;
   height: 100%;
   width: 100%;
