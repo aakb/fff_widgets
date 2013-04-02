@@ -438,7 +438,7 @@ var finurligeFaktaWidget = (function() {
     if (params.guid !== null) {
       getFactData(params);
     } else {
-      jQ.getJSON(fff.domain + "?method=getGuid&callback=?", function(rtnjson) {
+      jQ.getJSON(fff.domain + "?method=getGuid&api-key=714800b6f8ab26ce459c2d7ee11b15c3&callback=?", function(rtnjson) {
         params.guid = rtnjson.guid;
         // @todo: Add check for existing guids
         getFactData(params);
@@ -463,7 +463,7 @@ var finurligeFaktaWidget = (function() {
     jQ.ajax({
       url: fff.domain,
       cache: true,
-      data: {guid: params.guid, method: method},
+      data: {'guid' : params.guid, 'method' : method, 'api-key' : '714800b6f8ab26ce459c2d7ee11b15c3' },
       dataType: "jsonp",
       jsonp : "callback",
       jsonpCallback: params.callback
