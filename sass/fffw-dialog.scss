@@ -1,0 +1,62 @@
+@import "variables.scss";
+@import "typography.scss";
+@import "mixins.scss";
+
+.fffw-overlay {
+  @include rgba-background(#000, .45);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 500;
+}
+
+.fffw-dialog {
+  background-color: #FFF;
+  border: 8px solid $border-color;
+  position: fixed;
+  top: 50%;
+  margin-top: -227px; /* negative half of height */
+  left: 50%;
+  margin-left: -205px; /* negative half of width */
+  width: 410px;
+  z-index: 1000;
+
+  .fffw-header {
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #F5F5F5;
+    background-image: -moz-linear-gradient(center top , #FFFFFF, #E6E6E6);
+    background-repeat: repeat-x;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+    color: #333333;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0;
+    padding: 10px 14px;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    vertical-align: middle;
+  }
+
+  .fffw-close {
+    background: transparent url('../images/close.png') no-repeat;
+    position: absolute;
+    top: 9px;
+    right: 9px;
+    height: 24px;
+    width: 24px;
+    text-indent: -9999px;
+    &:hover {
+      background: transparent $image_close_url no-repeat;
+    }
+  }
+
+  .fffw-dialog-iframe {
+    border: none;
+    height: 400px;
+    width: 400px;
+    margin: 0 0 10px 10px;
+  }
+}

@@ -22,12 +22,109 @@
   font-style: "bold";
 }
 
-/* line 9, ../sass/typography.scss */
-.fffW-widget {
+/* line 10, ../sass/typography.scss */
+.fffW-widget,
+.fffw-dialog {
   font-family: PTSansRegular, helvetica, arial sans-serif;
 }
 
-/* line 6, ../sass/fffw-interactive.normal.scss */
+@font-face {
+  font-family: "akaDora";
+  src: url(/widgets/css/fonts/akaDora/akaDora.eot);
+  src: url(/widgets/css/fonts/akaDora/akaDora.eot?#iefix) format('eot'), url(/widgets/css/fonts/akaDora/akaDora.woff) format('woff'), url(/widgets/css/fonts/akaDora/akaDora.ttf) format('truetype'), url(/widgets/css/fonts/akaDora/akaDora.svg) format('svg');
+  font-weight: "normal";
+  font-style: "normal";
+}
+
+@font-face {
+  font-family: "PTSansRegular";
+  src: url(/widgets/css/fonts/ptSans/PTS55F-webfont.eot);
+  src: url(/widgets/css/fonts/ptSans/PTS55F-webfont.eot?#iefix) format('eot'), url(/widgets/css/fonts/ptSans/PTS55F-webfont.woff) format('woff'), url(/widgets/css/fonts/ptSans/PTS55F-webfont.ttf) format('truetype'), url(/widgets/css/fonts/ptSans/PTS55F-webfont.svg) format('svg');
+  font-weight: "normal";
+  font-style: "normal";
+}
+
+@font-face {
+  font-family: "mgOpenModerna";
+  src: url('/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.eot');
+  src: url('/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.eot?#iefix') format('eot'), url(/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.woff) format('woff'), url(/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.ttf) format('truetype'), url(/widgets/css/fonts/mgOpenModerna/mgopenmodernabold-webfont.svg) format('svg');
+  font-weight: "bold";
+  font-style: "bold";
+}
+
+/* line 10, ../sass/typography.scss */
+.fffW-widget,
+.fffw-dialog {
+  font-family: PTSansRegular, helvetica, arial sans-serif;
+}
+
+/* line 5, ../sass/fffw-dialog.scss */
+.fffw-overlay {
+  background-color: rgba(0, 0, 0, 0.45);
+  zoom: 1;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#73000000,endColorstr=#73000000);
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 500;
+}
+
+/* line 14, ../sass/fffw-dialog.scss */
+.fffw-dialog {
+  background-color: #FFF;
+  border: 8px solid #dfdfdf;
+  position: fixed;
+  top: 50%;
+  margin-top: -227px;
+  /* negative half of height */
+  left: 50%;
+  margin-left: -205px;
+  /* negative half of width */
+  width: 410px;
+  z-index: 1000;
+}
+/* line 25, ../sass/fffw-dialog.scss */
+.fffw-dialog .fffw-header {
+  -moz-border-bottom-colors: none;
+  -moz-border-left-colors: none;
+  -moz-border-right-colors: none;
+  -moz-border-top-colors: none;
+  background-color: #F5F5F5;
+  background-image: -moz-linear-gradient(center top, white, #e6e6e6);
+  background-repeat: repeat-x;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: #333333;
+  font-size: 16px;
+  line-height: 20px;
+  margin: 0;
+  padding: 10px 14px;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+}
+/* line 43, ../sass/fffw-dialog.scss */
+.fffw-dialog .fffw-close {
+  background: transparent url("../images/close.png") no-repeat;
+  position: absolute;
+  top: 9px;
+  right: 9px;
+  height: 24px;
+  width: 24px;
+  text-indent: -9999px;
+}
+/* line 51, ../sass/fffw-dialog.scss */
+.fffw-dialog .fffw-close:hover {
+  background: transparent url("../images/close_green.png") no-repeat;
+}
+/* line 56, ../sass/fffw-dialog.scss */
+.fffw-dialog .fffw-dialog-iframe {
+  border: none;
+  height: 400px;
+  width: 400px;
+  margin: 0 0 10px 10px;
+}
+
+/* line 7, ../sass/fffw-interactive.normal.scss */
 .fffW-widget {
   color: #444444;
   background-color: white;
@@ -36,23 +133,23 @@
   border: 8px solid #dfdfdf;
   font-size: 14px;
 }
-/* line 13, ../sass/fffw-interactive.normal.scss */
+/* line 14, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffw-logo {
   background: transparent no-repeat url("../images/widget_logo_FF_gr.png") 0 0;
   display: block;
   height: 40px;
   width: 85px;
 }
-/* line 19, ../sass/fffw-interactive.normal.scss */
+/* line 20, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffW-title {
   font-size: 22px;
   margin: 16px 0 0 0;
 }
-/* line 23, ../sass/fffw-interactive.normal.scss */
+/* line 24, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffW-text {
   margin: 10px 0;
 }
-/* line 26, ../sass/fffw-interactive.normal.scss */
+/* line 27, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffw-button-reload {
   position: relative;
   float: right;
@@ -65,40 +162,53 @@
   position: relative;
   text-indent: -9999px;
 }
-/* line 39, ../sass/fffw-interactive.normal.scss */
+/* line 40, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffw-button-reload:link, .fffW-widget .fffw-button-reload:visited, .fffW-widget .fffw-button-reload:active {
   outline: 0;
   cursor: pointer;
 }
-/* line 43, ../sass/fffw-interactive.normal.scss */
+/* line 44, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffw-button-reload:hover {
   background: transparent no-repeat url("../images/widget_reload_FF_gr.png") -32px 0;
   outline: 0;
   cursor: pointer;
 }
-/* line 49, ../sass/fffw-interactive.normal.scss */
+/* line 50, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffW-label {
   font-weight: bold;
   padding-right: .2em;
 }
-/* line 53, ../sass/fffw-interactive.normal.scss */
+/* line 54, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffW-external-links {
   font-size: 12px;
 }
-/* line 56, ../sass/fffw-interactive.normal.scss */
+/* line 57, ../sass/fffw-interactive.normal.scss */
 .fffW-widget .fffW-slogan {
   color: #acacac;
-  font-weight: bolder;
   text-align: center;
+}
+/* line 61, ../sass/fffw-interactive.normal.scss */
+.fffW-widget .fffW-slogan .fffw-button-create {
+  margin-top: 10px;
+  display: block;
+  color: #797979;
+}
+/* line 66, ../sass/fffw-interactive.normal.scss */
+.fffW-widget .fffW-slogan .fffw-button-create:hover {
+  color: black;
+}
+/* line 71, ../sass/fffw-interactive.normal.scss */
+.fffW-widget .fffW-slogan .fffw-slogan-text {
+  font-weight: bolder;
   text-transform: uppercase;
   margin-top: 10px;
   margin-bottom: 0;
 }
-/* line 67, ../sass/fffw-interactive.normal.scss */
+/* line 81, ../sass/fffw-interactive.normal.scss */
 .fffW-widget a:link, .fffW-widget a:visited, .fffW-widget a:active {
   color: #444444;
 }
-/* line 70, ../sass/fffw-interactive.normal.scss */
+/* line 84, ../sass/fffw-interactive.normal.scss */
 .fffW-widget a:hover {
   color: black;
   text-decoration: none;

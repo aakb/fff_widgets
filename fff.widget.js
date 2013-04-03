@@ -20,7 +20,8 @@ var finurligeFaktaWidget = (function() {
     },
     'tracking' : true,
     'button' : {
-      'reload' : true
+      'reload' : true,
+      'create' : false
     },
     'event' : {
       'loadComplet' : null
@@ -96,6 +97,11 @@ var finurligeFaktaWidget = (function() {
                                 .append(jQ("<p />", {"class" : "fffW-text"}).append(this.data.content))
                             );
 
+      // Add slogan
+      jQ('.fffW-innerwrapper', this.widget).append(jQ('<div />', { 'class' : 'fffW-slogan' })
+                                                    .append(jQ('<p />', { 'class' : 'fffw-slogan-text', 'text' : 'Viden fra biblioteket' }))
+                                                  );
+
       // Check if reload button should be attached.
       if (this.params.button.reload) {
         var self = this;
@@ -105,6 +111,7 @@ var finurligeFaktaWidget = (function() {
           event.stopPropagation();
           event.preventDefault();
 
+          // Should the event be send to GA.
           if (self.params.tracking) {
             trackEvent({
              'Reloaded' : document.location.host
@@ -119,11 +126,39 @@ var finurligeFaktaWidget = (function() {
         });
       }
 
-      // Add slogan
-      jQ('.fffW-innerwrapper', this.widget).append(jQ('<p />', {
-        'class' : 'fffW-slogan',
-        'text' : 'Viden fra biblioteket'
-      }));
+      if (this.params.button.create) {
+        var create = jQ('<a class="fffw-button fffw-button-create" href="#">Tilføj Fakta</a>');
+        jQ('.fffW-slogan', this.widget).prepend(create);
+        create.click(function(event) {
+          event.stopPropagation();
+          event.preventDefault();
+
+          // Should the event be send to GA.
+          if (self.params.tracking) {
+            trackEvent({
+             'New fact' : document.location.host
+            });
+          }
+
+          // Build the dialog window.
+          var popup = jQ('<div/>', { 'class' : 'fffw-dialog' })
+                       .append(jQ('<h3/>', { 'class' : 'fffw-header' }).html('Bidrag med Finurlige Fakta'))
+                       .append(jQ('<a/>', { 'class' : 'fffw-close', 'href' : '#' }).html('Close'))
+                       .append(jQ('<iframe/>', { 'class' : 'fffw-dialog-iframe' }));
+
+          // Add overlay and insert the dialog.
+          jQ('body').append(jQ('<div/>', { 'class' : 'fffw-overlay' }));
+          jQ('body').append(popup);
+
+          // Load the form into the iframe from the homepage.
+          jQ('iframe', popup).attr('src', 'http://finurligefakta.dk/ajax/create/fact');
+
+          jQ('.fffw-close', popup).click(function() {
+            popup.remove();
+            jQ('.fffw-overlay').remove();
+          });
+        });
+      }
 
       // Make sure that it now shown yet.
       this.widget.hide();
@@ -403,7 +438,7 @@ var finurligeFaktaWidget = (function() {
     if (params.guid !== null) {
       getFactData(params);
     } else {
-      jQ.getJSON(fff.domain + "?method=getGuid&callback=?", function(rtnjson) {
+      jQ.getJSON(fff.domain + "?method=getGuid&api-key=714800b6f8ab26ce459c2d7ee11b15c3&callback=?", function(rtnjson) {
         params.guid = rtnjson.guid;
         // @todo: Add check for existing guids
         getFactData(params);
@@ -428,7 +463,7 @@ var finurligeFaktaWidget = (function() {
     jQ.ajax({
       url: fff.domain,
       cache: true,
-      data: {guid: params.guid, method: method},
+      data: {'guid' : params.guid, 'method' : method, 'api-key' : '714800b6f8ab26ce459c2d7ee11b15c3' },
       dataType: "jsonp",
       jsonp : "callback",
       jsonpCallback: params.callback
@@ -517,21 +552,20 @@ var finurligeFaktaWidget = (function() {
 (function() {
   "use strict";
 
-  // Don't let the script run forever.
-  var attempts = 30;
-
-  var load_jQuery = function(url, callback) {
+  // Helper function to load jQuery.
+  var load_javascript = function(url, callback) {
     var script = document.createElement("script");
     script.type = "text/javascript";
 
-    if (script.readyState) { //IE
+    if (script.readyState) { //IE fix
       script.onreadystatechange = function () {
         if (script.readyState == "loaded" || script.readyState == "complete") {
           script.onreadystatechange = null;
           callback();
         }
       };
-    } else { //Others
+    }
+    else { //Others
       script.onload = function () {
         callback();
       };
@@ -539,7 +573,7 @@ var finurligeFaktaWidget = (function() {
 
     script.src = url;
     document.getElementsByTagName("head")[0].appendChild(script);
-  }
+  };
 
   // Load jQuery 1.4.0 as thats the first known version to support jsonp as we
   // uses it in the widgets to load facts. But only if an newer version is not
@@ -550,7 +584,7 @@ var finurligeFaktaWidget = (function() {
     });
   }
   else {
-    load_jQuery("https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js", function () {
+    load_javascript("https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js", function () {
       var jQ = jQuery.noConflict(true);
       // Start the widget parsing in jQuery 1.4.0.
       jQ(document).ready(function() {
