@@ -41,7 +41,7 @@ var finurligeFaktaWidget = (function() {
     return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
   }
 
-  // Enable Google Analytices tracking.
+  // Enable Google Analytics tracking.
   function trackEvent(events, trackPageview) {
     // Add Google Analytics to the page.
     if (window._gaq === undefined) {
@@ -151,7 +151,7 @@ var finurligeFaktaWidget = (function() {
           jQ('body').append(popup);
 
           // Load the form into the iframe from the homepage.
-          jQ('iframe', popup).attr('src', 'http://finurligefakta.dk/ajax/create/fact');
+          jQ('iframe', popup).attr('src', '//finurligefakta.dk/ajax/create/fact');
 
           jQ('.fffw-close', popup).click(function() {
             popup.remove();
@@ -521,7 +521,7 @@ var finurligeFaktaWidget = (function() {
         params.style.type = 'minimal';
       }
 
-      // Enable event tracking (Google Analytices).
+      // Enable event tracking (Google Analytics).
       if (params.tracking) {
         trackEvent({
           'Loaded at' : document.location.host,
@@ -546,7 +546,7 @@ var finurligeFaktaWidget = (function() {
 
 /************************************
  **                                **
- ** Include JQuery programatically **
+ ** Include JQuery problematically **
  **                                **
  ************************************/
 (function() {
@@ -575,7 +575,7 @@ var finurligeFaktaWidget = (function() {
     document.getElementsByTagName("head")[0].appendChild(script);
   };
 
-  // Load jQuery 1.4.0 as thats the first known version to support jsonp as we
+  // Load jQuery 1.4.0 as that's the first known version to support jsonp as we
   // uses it in the widgets to load facts. But only if an newer version is not
   // found.
   if (typeof(jQuery) !== "undefined" && parseFloat(jQuery.fn.jquery) >= 1.4) {
